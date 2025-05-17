@@ -1,0 +1,44 @@
+import { Pressable, PressableProps } from 'react-native';
+import { cn } from '@shared/lib/utils';
+import { cva, type VariantProps } from 'class-variance-authority';
+
+interface CustomButtonProps
+  extends PressableProps,
+    VariantProps<typeof buttonVariants> {}
+
+const buttonVariants = cva(
+  'flex flex-row items-center justify-center gap-2 w-full',
+  {
+    variants: {
+      variant: {
+        default: 'bg-orange-400 active:bg-orange-300',
+        secondary: 'bg-gray-100 active:bg-gray-50',
+        link: 'underline',
+      },
+      size: {
+        default: 'py-4 px-4 rounded-2xl',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      size: 'default',
+    },
+  },
+);
+
+export const CustomButton = ({
+  children,
+  className,
+  variant,
+  size,
+  ...props
+}: CustomButtonProps) => {
+  return (
+    <Pressable
+      className={cn(buttonVariants({ variant, size, className }))}
+      {...props}
+    >
+      {children}
+    </Pressable>
+  );
+};
