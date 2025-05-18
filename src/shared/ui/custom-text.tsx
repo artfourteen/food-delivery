@@ -9,14 +9,14 @@ interface CustomTextProps
 const textVariants = cva('font-dm-sans', {
   variants: {
     as: {
-      h1: 'font-dm-sans-medium text-[2.125rem] leading-10',
-      h2: 'font-dm-sans-bold text-[1.75rem] leading-9',
-      h3: 'font-dm-sans-bold text-2xl',
-      headline: 'font-dm-sans-bold text-3xl',
-      'text-body': 'font-dm-sans-normal text-sm',
-      'text-subhead': 'font-dm-sans-medium text-xl',
-      'text-caption': 'font-dm-sans-normal text-base',
-      'text-caption2': 'font-dm-sans-medium text-xs',
+      h1: 'text-[2.125rem] leading-10',
+      h2: 'text-[1.75rem] leading-9',
+      h3: 'text-2xl',
+      headline: 'text-3xl',
+      'text-body': 'text-sm',
+      'text-subhead': 'text-xl',
+      'text-caption': 'text-base',
+      'text-caption2': 'text-xs',
     },
   },
   defaultVariants: {

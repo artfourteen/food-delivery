@@ -26,7 +26,7 @@ export default function LoginScreen() {
                 Hello, sign in to continue! Or{' '}
                 <CustomText
                   onPress={() => router.push('/(auth)/register')}
-                  className="text-orange-400"
+                  className="text-orange-400 under"
                 >
                   Create new account
                 </CustomText>

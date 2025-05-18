@@ -21,7 +21,16 @@ export const SearchInput = ({
           <MapPin color="#979797" />
         </View>
       )}
-      <CustomInput className={cn('px-12', className)} {...props} />
+      <CustomInput
+        className={cn(
+          'pr-12',
+          {
+            'pl-12': withIcon,
+          },
+          className,
+        )}
+        {...props}
+      />
       <Pressable
         onPress={onClear}
         className="absolute right-2.5 top-1/2 -translate-y-1/2"

@@ -5,8 +5,10 @@
     "baseUrl": ".",
     "paths": {
       "@shared/*": ["./src/shared/*"],
-      "@assets/*": ["./assets/*"]
+      "@assets/*": ["./assets/*"],
+      "@widgets/*": ["./src/widgets/*"],
+      "@entities/*": ["./src/entities/*"]
     },
     "types": ["react-native-svg"]
-  },
+  }
 }
