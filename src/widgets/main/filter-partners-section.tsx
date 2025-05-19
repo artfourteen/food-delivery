@@ -48,7 +48,7 @@ export const FilterPartnersSection = () => {
             {mockPartners.map((partner, index) => (
               <Pressable
                 key={partner.id}
-                onPress={() => router.push(`/partners-details/${partner.id}`)}
+                onPress={() => router.push(`/partner-details/${partner.id}`)}
                 className="active:opacity-80"
               >
                 <PartnerCardMd

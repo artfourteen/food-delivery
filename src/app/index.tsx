@@ -26,7 +26,7 @@ export default function MainScreen() {
   return (
     <>
       <ScrollView>
-        <View className="gap-4 bg-gray-100 pb-9">
+        <View className="gap-4 pb-9">
           <Header />
 
           <CategoriesSection />

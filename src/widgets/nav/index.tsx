@@ -15,7 +15,7 @@ export const Nav = () => {
 
   return (
     <View
-      className="fixed bottom-0 z-10 bg-white rounded-t-[30px] flex-row justify-around w-full"
+      className="fixed bottom-0 z-10 overflow-hidden rounded-t-[30px] flex-row justify-around w-full"
       style={{
         boxShadow:
           'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px',

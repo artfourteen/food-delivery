@@ -43,7 +43,7 @@ export const PartnersSheet = forwardRef<BottomSheetMethods>((_, ref) => {
             {mockPartners.map((partner) => (
               <Pressable
                 key={partner.id}
-                onPress={() => router.push(`/partners-details/${partner.id}`)}
+                onPress={() => router.push(`/partner-details/${partner.id}`)}
                 className="active:opacity-80 py-4"
               >
                 <PartnerCardMd key={partner.id} {...partner} />

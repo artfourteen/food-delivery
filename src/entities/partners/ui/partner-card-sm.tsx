@@ -1,4 +1,4 @@
-import { Image, Pressable, View } from 'react-native';
+import { Image, View } from 'react-native';
 import { CustomText } from '@shared/ui/custom-text';
 import { Dot } from '@shared/ui/dot';
 import { PartnerEntity } from '../model/partners';
@@ -6,7 +6,6 @@ import { PartnerEntity } from '../model/partners';
 import ShieldCheck from '@assets/img/icons/shield-check.svg';
 import StarWhite from '@assets/img/icons/star-white.svg';
 import subway from '@assets/img/partners/subway.png';
-import { useRouter } from 'expo-router';
 
 export const PartnerCardSm = ({
   open,
@@ -15,15 +14,9 @@ export const PartnerCardSm = ({
   rating,
   address,
   freeShipping,
-  id,
 }: PartnerEntity) => {
-  const router = useRouter();
-
   return (
-    <Pressable
-      onPress={() => router.push(`/partners-details/${id}`)}
-      className="active:opacity-80"
-    >
+    <View>
       <View className="min-w-[205px] max-h-[116px] rounded-2xl overflow-hidden bg-orange-50 mb-4">
         <Image source={subway} className="w-full h-full" />
       </View>
@@ -95,6 +88,6 @@ export const PartnerCardSm = ({
           </>
         )}
       </View>
-    </Pressable>
+    </View>
   );
 };

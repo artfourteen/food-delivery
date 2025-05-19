@@ -37,7 +37,13 @@ export const PartnersSection = ({ handleOpenSheet }: PartnersSectionProps) => {
           >
             <View className="flex-row gap-5">
               {mockPartners.map((partner) => (
-                <PartnerCardSm key={partner.id} {...partner} />
+                <Pressable
+                  key={partner.id}
+                  onPress={() => router.push(`/partner-details/${partner.id}`)}
+                  className="active:opacity-80"
+                >
+                  <PartnerCardSm {...partner} />
+                </Pressable>
               ))}
             </View>
           </ScrollView>
