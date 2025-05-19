@@ -4,15 +4,16 @@ import { CustomText } from '@shared/ui/custom-text';
 import { Dot } from '@shared/ui/dot';
 import { Fragment } from 'react';
 import Dollar from '@assets/img/icons/dollar.svg';
-import { PartnerEntity } from '@entities/partners/model/types';
+import { PartnerEntity } from '@entities/partners/model/partners';
 
 import ShieldCheck from '@assets/img/icons/shield-check.svg';
-import HeartWhite from '@assets/img/icons/heart-white.svg';
+import StarWhite from '@assets/img/icons/star-white.svg';
 import PinLocation from '@assets/img/icons/pin-location.svg';
 import burgerKing from '@assets/img/partners/burger-king.png';
 
 interface PartnerCardMdProps extends PartnerEntity {
   withUnderLine?: boolean;
+  className?: string;
 }
 
 export const PartnerCardMd = ({
@@ -23,12 +24,16 @@ export const PartnerCardMd = ({
   open,
   categories,
   withUnderLine = false,
+  className,
 }: PartnerCardMdProps) => {
   return (
     <View
-      className={cn('p-8', {
-        'border-b border-gray-100': withUnderLine,
-      })}
+      className={cn(
+        {
+          'border-b border-gray-100': withUnderLine,
+        },
+        className,
+      )}
     >
       <View className="w-full max-h-[172px] rounded-2xl overflow-hidden bg-orange-50 mb-4">
         <Image source={burgerKing} className="w-full h-full" />
@@ -76,7 +81,7 @@ export const PartnerCardMd = ({
 
       <View className="flex-row items-center">
         <View className="flex-row items-center gap-1 bg-orange-400 pl-1 pr-2 py-0.5 rounded-lg">
-          <HeartWhite />
+          <StarWhite />
           <CustomText
             as="text-caption2"
             className="font-dm-sans-medium text-white"

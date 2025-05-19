@@ -1,3 +1,5 @@
+import { ReviewEntity } from '@entities/reviews/model';
+
 export interface PartnerEntity {
   id: string;
   name: string;
@@ -7,4 +9,5 @@ export interface PartnerEntity {
   freeShipping: boolean;
   open: boolean;
   categories: string[];
+  reviews: ReviewEntity[];
 }

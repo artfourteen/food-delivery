@@ -6,7 +6,7 @@ interface CustomTextProps
   extends TextProps,
     VariantProps<typeof textVariants> {}
 
-const textVariants = cva('font-dm-sans', {
+const textVariants = cva('font-dm-sans text-blue-950', {
   variants: {
     as: {
       h1: 'text-[2.125rem] leading-10',

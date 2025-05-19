@@ -1,10 +1,16 @@
-import { Pressable, ScrollView, View } from 'react-native';
+import {
+  Keyboard,
+  Pressable,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import { Container } from '@shared/ui/container';
 import { CustomText } from '@shared/ui/custom-text';
 import { useState } from 'react';
 import { cn } from '@shared/lib/utils';
-import { mockPartners } from '@shared/constants/partners';
 import { PartnerCardMd } from '@entities/partners/ui/partner-card-md';
+import { mockPartners } from '@shared/constants';
+import { useRouter } from 'expo-router';
 
 type TabType = 'nearby' | 'sales' | 'rate' | 'fast';
 
@@ -12,6 +18,7 @@ const tabs: TabType[] = ['nearby', 'sales', 'rate', 'fast'];
 
 export const FilterPartnersSection = () => {
   const [selectedTab, setSelectedTab] = useState<TabType>('nearby');
+  const router = useRouter();
 
   return (
     <Container>
@@ -36,15 +43,23 @@ export const FilterPartnersSection = () => {
           ))}
         </View>
 
-        <ScrollView contentContainerClassName="flex-grow">
-          {mockPartners.map((partner, index) => (
-            <PartnerCardMd
-              key={partner.id}
-              {...partner}
-              withUnderLine={mockPartners.length - 1 !== index}
-            />
-          ))}
-        </ScrollView>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View>
+            {mockPartners.map((partner, index) => (
+              <Pressable
+                key={partner.id}
+                onPress={() => router.push(`/partners-details/${partner.id}`)}
+                className="active:opacity-80"
+              >
+                <PartnerCardMd
+                  {...partner}
+                  withUnderLine={mockPartners.length - 1 !== index}
+                  className="p-8"
+                />
+              </Pressable>
+            ))}
+          </View>
+        </TouchableWithoutFeedback>
       </View>
     </Container>
   );

@@ -1,4 +1,4 @@
-import { PartnerEntity } from '@entities/partners/model/types';
+import { PartnerEntity } from '@entities/partners/model/partners';
 
 export const mockPartners: PartnerEntity[] = [
   {
@@ -10,6 +10,48 @@ export const mockPartners: PartnerEntity[] = [
     freeShipping: true,
     open: true,
     categories: ['Sandwich', 'Salads', 'Fast Food'],
+    reviews: [
+      {
+        id: '1',
+        user: 'Eleanor Summers',
+        description:
+          "What can I say it's fast food, it's Burger King.No different to any of the other burger kings, nice with adequate seating",
+        likesCount: 68,
+        createdAt: 'Today, 16:40',
+        rating: 5,
+        liked: true,
+      },
+      {
+        id: '2',
+        user: 'Victoria Champain',
+        description:
+          'Food, as always, is good both upstairs and downstairs is always clean (download the bk app for deals etc.) sit upstairs every time, more relaxed feel.',
+        likesCount: 132,
+        createdAt: 'Today, 09:12',
+        rating: 5,
+        liked: false,
+      },
+      {
+        id: '3',
+        user: 'Laura Smith',
+        description:
+          'Amazing food. Lots of choice. We took a while to choose as everything sounded amazing on the menu! All cooked to perfection. Portions were large. Service excellent. Definitely plan to go again and often!',
+        likesCount: 32,
+        createdAt: 'Yesterday, 16:40',
+        rating: 3,
+        liked: true,
+      },
+      {
+        id: '4',
+        user: 'Dora Perry',
+        description:
+          'I popped in for a late lunch on Friday after a long morning working. The staff member was rude and unhelpful and the toilets were closed. I will not be returning and suggest others do not either.',
+        likesCount: 99,
+        createdAt: 'Yesterday, 16:40',
+        rating: 1,
+        liked: false,
+      },
+    ],
   },
   {
     id: '2',
@@ -20,6 +62,48 @@ export const mockPartners: PartnerEntity[] = [
     freeShipping: false,
     open: true,
     categories: ['Burgers', 'Fries', 'Drinks'],
+    reviews: [
+      {
+        id: '1',
+        user: 'Eleanor Summers',
+        description:
+          "What can I say it's fast food, it's Burger King.No different to any of the other burger kings, nice with adequate seating",
+        likesCount: 68,
+        createdAt: 'Today, 16:40',
+        rating: 5,
+        liked: true,
+      },
+      {
+        id: '2',
+        user: 'Victoria Champain',
+        description:
+          'Food, as always, is good both upstairs and downstairs is always clean (download the bk app for deals etc.) sit upstairs every time, more relaxed feel.',
+        likesCount: 132,
+        createdAt: 'Today, 09:12',
+        rating: 5,
+        liked: false,
+      },
+      {
+        id: '3',
+        user: 'Laura Smith',
+        description:
+          'Amazing food. Lots of choice. We took a while to choose as everything sounded amazing on the menu! All cooked to perfection. Portions were large. Service excellent. Definitely plan to go again and often!',
+        likesCount: 32,
+        createdAt: 'Yesterday, 16:40',
+        rating: 3,
+        liked: true,
+      },
+      {
+        id: '4',
+        user: 'Dora Perry',
+        description:
+          'I popped in for a late lunch on Friday after a long morning working. The staff member was rude and unhelpful and the toilets were closed. I will not be returning and suggest others do not either.',
+        likesCount: 99,
+        createdAt: 'Yesterday, 16:40',
+        rating: 1,
+        liked: false,
+      },
+    ],
   },
   {
     id: '3',
@@ -30,6 +114,48 @@ export const mockPartners: PartnerEntity[] = [
     freeShipping: true,
     open: false,
     categories: ['Pizza', 'Pasta', 'Desserts'],
+    reviews: [
+      {
+        id: '1',
+        user: 'Eleanor Summers',
+        description:
+          "What can I say it's fast food, it's Burger King.No different to any of the other burger kings, nice with adequate seating",
+        likesCount: 68,
+        createdAt: 'Today, 16:40',
+        rating: 5,
+        liked: true,
+      },
+      {
+        id: '2',
+        user: 'Victoria Champain',
+        description:
+          'Food, as always, is good both upstairs and downstairs is always clean (download the bk app for deals etc.) sit upstairs every time, more relaxed feel.',
+        likesCount: 132,
+        createdAt: 'Today, 09:12',
+        rating: 5,
+        liked: false,
+      },
+      {
+        id: '3',
+        user: 'Laura Smith',
+        description:
+          'Amazing food. Lots of choice. We took a while to choose as everything sounded amazing on the menu! All cooked to perfection. Portions were large. Service excellent. Definitely plan to go again and often!',
+        likesCount: 32,
+        createdAt: 'Yesterday, 16:40',
+        rating: 3,
+        liked: true,
+      },
+      {
+        id: '4',
+        user: 'Dora Perry',
+        description:
+          'I popped in for a late lunch on Friday after a long morning working. The staff member was rude and unhelpful and the toilets were closed. I will not be returning and suggest others do not either.',
+        likesCount: 99,
+        createdAt: 'Yesterday, 16:40',
+        rating: 1,
+        liked: false,
+      },
+    ],
   },
   {
     id: '4',
@@ -40,6 +166,48 @@ export const mockPartners: PartnerEntity[] = [
     freeShipping: false,
     open: true,
     categories: ['Drinks', 'Breakfast', 'Desserts'],
+    reviews: [
+      {
+        id: '1',
+        user: 'Eleanor Summers',
+        description:
+          "What can I say it's fast food, it's Burger King.No different to any of the other burger kings, nice with adequate seating",
+        likesCount: 68,
+        createdAt: 'Today, 16:40',
+        rating: 5,
+        liked: false,
+      },
+      {
+        id: '2',
+        user: 'Victoria Champain',
+        description:
+          'Food, as always, is good both upstairs and downstairs is always clean (download the bk app for deals etc.) sit upstairs every time, more relaxed feel.',
+        likesCount: 132,
+        createdAt: 'Today, 09:12',
+        rating: 5,
+        liked: true,
+      },
+      {
+        id: '3',
+        user: 'Laura Smith',
+        description:
+          'Amazing food. Lots of choice. We took a while to choose as everything sounded amazing on the menu! All cooked to perfection. Portions were large. Service excellent. Definitely plan to go again and often!',
+        likesCount: 32,
+        createdAt: 'Yesterday, 16:40',
+        rating: 3,
+        liked: false,
+      },
+      {
+        id: '4',
+        user: 'Dora Perry',
+        description:
+          'I popped in for a late lunch on Friday after a long morning working. The staff member was rude and unhelpful and the toilets were closed. I will not be returning and suggest others do not either.',
+        likesCount: 99,
+        createdAt: 'Yesterday, 16:40',
+        rating: 1,
+        liked: true,
+      },
+    ],
   },
   {
     id: '5',
@@ -50,105 +218,47 @@ export const mockPartners: PartnerEntity[] = [
     freeShipping: true,
     open: false,
     categories: ['Tacos', 'Burritos', 'Fast Food'],
-  },
-  {
-    id: '6',
-    name: 'KFC',
-    address: 'Fresno, CA 93720',
-    rating: 3.8,
-    distance: 5.0,
-    freeShipping: false,
-    open: true,
-    categories: ['Fried Chicken', 'BBQ', 'Drinks'],
-  },
-  {
-    id: '7',
-    name: 'Panda Express',
-    address: 'Madera, CA 93637',
-    rating: 4.4,
-    distance: 2.7,
-    freeShipping: true,
-    open: true,
-    categories: ['Chinese', 'Rice Bowls', 'Noodles'],
-  },
-  {
-    id: '8',
-    name: 'Chipotle',
-    address: 'Clovis, CA 93611',
-    rating: 4.0,
-    distance: 3.0,
-    freeShipping: false,
-    open: false,
-    categories: ['Tacos', 'Rice Bowls', 'Healthy'],
-  },
-  {
-    id: '9',
-    name: 'Five Guys',
-    address: 'Visalia, CA 93277',
-    rating: 4.6,
-    distance: 1.9,
-    freeShipping: true,
-    open: true,
-    categories: ['Burgers', 'Fries', 'Drinks'],
-  },
-  {
-    id: '10',
-    name: 'In-N-Out Burger',
-    address: 'Bakersfield, CA 93312',
-    rating: 4.8,
-    distance: 0.5,
-    freeShipping: true,
-    open: true,
-    categories: ['Burgers', 'Fries', 'Fast Food'],
-  },
-  {
-    id: '11',
-    name: 'Domino’s Pizza',
-    address: 'Delano, CA 93215',
-    rating: 3.7,
-    distance: 4.8,
-    freeShipping: false,
-    open: false,
-    categories: ['Pizza', 'Desserts', 'Drinks'],
-  },
-  {
-    id: '12',
-    name: 'Denny’s',
-    address: 'Wasco, CA 93280',
-    rating: 4.3,
-    distance: 2.3,
-    freeShipping: true,
-    open: true,
-    categories: ['Breakfast', 'Pasta', 'Steak'],
-  },
-  {
-    id: '13',
-    name: 'Panera Bread',
-    address: 'Hanford, CA 93230',
-    rating: 4.2,
-    distance: 3.6,
-    freeShipping: false,
-    open: false,
-    categories: ['Salads', 'Soup', 'Sandwich'],
-  },
-  {
-    id: '14',
-    name: 'Sonic Drive-In',
-    address: 'Porterville, CA 93257',
-    rating: 3.9,
-    distance: 1.2,
-    freeShipping: true,
-    open: true,
-    categories: ['Drinks', 'Burgers', 'Desserts'],
-  },
-  {
-    id: '15',
-    name: 'Wendy’s',
-    address: 'Reedley, CA 93654',
-    rating: 4.0,
-    distance: 2.9,
-    freeShipping: false,
-    open: true,
-    categories: ['Burgers', 'Salads', 'Fries'],
+    reviews: [
+      {
+        id: '1',
+        user: 'Eleanor Summers',
+        description:
+          "What can I say it's fast food, it's Burger King.No different to any of the other burger kings, nice with adequate seating",
+        likesCount: 68,
+        createdAt: 'Today, 16:40',
+        rating: 5,
+        liked: false,
+      },
+      {
+        id: '2',
+        user: 'Victoria Champain',
+        description:
+          'Food, as always, is good both upstairs and downstairs is always clean (download the bk app for deals etc.) sit upstairs every time, more relaxed feel.',
+        likesCount: 132,
+        createdAt: 'Today, 09:12',
+        rating: 5,
+        liked: true,
+      },
+      {
+        id: '3',
+        user: 'Laura Smith',
+        description:
+          'Amazing food. Lots of choice. We took a while to choose as everything sounded amazing on the menu! All cooked to perfection. Portions were large. Service excellent. Definitely plan to go again and often!',
+        likesCount: 32,
+        createdAt: 'Yesterday, 16:40',
+        rating: 3,
+        liked: false,
+      },
+      {
+        id: '4',
+        user: 'Dora Perry',
+        description:
+          'I popped in for a late lunch on Friday after a long morning working. The staff member was rude and unhelpful and the toilets were closed. I will not be returning and suggest others do not either.',
+        likesCount: 99,
+        createdAt: 'Yesterday, 16:40',
+        rating: 1,
+        liked: true,
+      },
+    ],
   },
 ];

@@ -5,28 +5,33 @@ import { CustomButton } from '@shared/ui/custom-button';
 import { Container } from '@shared/ui/container';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Header } from '@widgets/header';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { CategoriesSection } from '@widgets/main/categories-section';
 import { PartnersSection } from '@widgets/main/partners-section';
 import { FilterPartnersSection } from '@widgets/main/filter-partners-section';
+import { PartnersSheet } from '@widgets/main/partners-sheet';
+import { useRef } from 'react';
+import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 
 export default function MainScreen() {
   const router = useRouter();
+  const partnersSheetRef = useRef<BottomSheetMethods>(null);
 
   const handleClear = async () => {
     await AsyncStorage.removeItem('hasSeenOnboarding');
     router.push('/onboarding');
   };
 
+  const handleOpenPartnersSheet = () => partnersSheetRef.current?.expand();
+
   return (
-    <GestureHandlerRootView>
+    <>
       <ScrollView>
-        <View className="gap-4 bg-gray-100">
+        <View className="gap-4 bg-gray-100 pb-9">
           <Header />
 
           <CategoriesSection />
 
-          <PartnersSection />
+          <PartnersSection handleOpenSheet={handleOpenPartnersSheet} />
 
           <FilterPartnersSection />
 
@@ -50,10 +55,11 @@ export default function MainScreen() {
               </CustomButton>
             </View>
           </Container>
-
           <StatusBar style="auto" backgroundColor="white" />
         </View>
       </ScrollView>
-    </GestureHandlerRootView>
+
+      <PartnersSheet ref={partnersSheetRef} />
+    </>
   );
 }

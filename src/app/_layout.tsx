@@ -12,6 +12,8 @@ import {
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Nav } from '@widgets/nav';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -52,7 +54,10 @@ export default function RootLayout() {
 
   return (
     <SafeAreaProvider>
-      <Stack screenOptions={{ headerShown: false }} />
+      <GestureHandlerRootView>
+        <Stack screenOptions={{ headerShown: false }} />
+        <Nav />
+      </GestureHandlerRootView>
     </SafeAreaProvider>
   );
 }
