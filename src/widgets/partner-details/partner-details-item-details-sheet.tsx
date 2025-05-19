@@ -6,11 +6,11 @@ import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { bottomSheetStyles } from '@shared/constants';
 import { Container } from '@shared/ui/container';
-
-import whopper from '@assets/img/partners/whopper.png';
 import { cn } from '@shared/lib/utils';
 import { Minus, Plus } from 'lucide-react-native';
 import { CustomButton } from '@shared/ui/custom-button';
+
+import whopper from '@assets/img/partners/whopper.png';
 
 type SizeType = 'sm' | 'md' | 'lg';
 

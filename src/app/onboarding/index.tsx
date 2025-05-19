@@ -28,7 +28,6 @@ export default function OnboardingScreen() {
         <View className="h-full items-center justify-between pt-40 pb-20 relative">
           {step !== 3 && (
             <CustomButton
-              variant="link"
               className="absolute top-10 right-0 w-fit"
               onPress={handleFinish}
             >

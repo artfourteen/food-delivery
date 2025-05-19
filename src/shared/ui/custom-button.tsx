@@ -13,7 +13,7 @@ const buttonVariants = cva(
       variant: {
         default: 'bg-orange-400 active:bg-orange-300',
         secondary: 'bg-gray-100 active:bg-gray-50',
-        link: 'underline',
+        outline: 'bg-transparent active:opacity-70 border border-gray-200',
       },
       size: {
         default: 'py-4 px-4 rounded-2xl',

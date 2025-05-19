@@ -14,13 +14,7 @@ export const Nav = () => {
   const pathname = usePathname();
 
   return (
-    <View
-      className="fixed bottom-0 z-10 overflow-hidden rounded-t-[30px] flex-row justify-around w-full"
-      style={{
-        boxShadow:
-          'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px',
-      }}
-    >
+    <View className="fixed bottom-0 z-10 overflow-hidden flex-row justify-around w-full border-t border-gray-200">
       <Pressable
         className="items-center py-4 w-1/4"
         onPress={() => router.push('/')}
