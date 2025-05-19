@@ -7,7 +7,8 @@
       "@shared/*": ["./src/shared/*"],
       "@assets/*": ["./assets/*"],
       "@widgets/*": ["./src/widgets/*"],
-      "@entities/*": ["./src/entities/*"]
+      "@entities/*": ["./src/entities/*"],
+      "@features/*": ["./src/features/*"]
     },
     "types": ["react-native-svg"]
   }

@@ -21,11 +21,16 @@ const inputVariants = cva('', {
 export const CustomInput = ({
   className,
   variant,
+  multiline,
   ...props
 }: CustomInputProps) => {
   return (
     <TextInput
       className={cn(inputVariants({ variant, className }))}
+      multiline={multiline}
+      style={{
+        textAlignVertical: multiline ? 'top' : 'auto',
+      }}
       {...props}
     />
   );

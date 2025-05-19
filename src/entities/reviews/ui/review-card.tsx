@@ -6,6 +6,8 @@ import StarOrangeSm from '@assets/img/icons/star-orange-sm.svg';
 import StarGraySm from '@assets/img/icons/star-gray-sm.svg';
 import HeartOrange from '@assets/img/icons/heart-orange.svg';
 import HeartGray from '@assets/img/icons/heart-gray.svg';
+import StarOrangeLg from '@assets/img/icons/star-orange-lg.svg';
+import StarGrayLg from '@assets/img/icons/star-gray-lg.svg';
 
 interface ReviewCardProps extends ReviewEntity {
   className?: string;

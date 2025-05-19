@@ -1,5 +1,5 @@
 import { View, ViewProps } from 'react-native';
-import { cn } from '../lib/utils';
+import { cn } from '@shared/lib/utils';
 
 export const Container = ({ children, className }: ViewProps) => {
   return (

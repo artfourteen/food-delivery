@@ -27,7 +27,7 @@ export const AddPaymentMethodSheet = forwardRef<
       handleIndicatorStyle={bottomSheetStyles.handleIndicator}
       index={-1}
       enableDynamicSizing={false}
-      enablePanDownToClose={true}
+      enablePanDownToClose
     >
       <BottomSheetView>
         <View className="py-6 border-b border-gray-100">

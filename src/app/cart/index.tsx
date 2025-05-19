@@ -6,7 +6,7 @@ import { CartDeliverToSection, CartYourOrderSection } from '@widgets/cart';
 import { CartPaymentSection } from '@widgets/cart/cart-payment-section';
 import { useRef } from 'react';
 import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
-import { AddPaymentMethodSheet } from '@widgets/add-payment-method-sheet';
+import { AddPaymentMethodSheet } from '@features/payment/ui';
 
 export default function CartScreen() {
   const addPaymentSheetRef = useRef<BottomSheetMethods>(null);

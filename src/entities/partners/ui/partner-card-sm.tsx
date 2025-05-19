@@ -1,7 +1,7 @@
 import { Image, View } from 'react-native';
 import { CustomText } from '@shared/ui/custom-text';
 import { Dot } from '@shared/ui/dot';
-import { PartnerEntity } from '../model/partners';
+import { PartnerEntity } from '@entities/partners/model/partners';
 
 import ShieldCheck from '@assets/img/icons/shield-check.svg';
 import StarWhite from '@assets/img/icons/star-white.svg';
