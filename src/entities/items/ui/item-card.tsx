@@ -14,7 +14,7 @@ export const ItemCard = ({ price, name, category }: ItemEntity) => {
 
       <View className="flex-row gap-2 items-center">
         <CustomText as="text-caption2" className="text-green-600 font-medium">
-          $ {price}
+          ${price}
         </CustomText>
 
         <Dot />

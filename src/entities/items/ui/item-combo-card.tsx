@@ -33,7 +33,7 @@ export const ItemComboCard = ({
               as="text-caption2"
               className="font-dm-sans-medium text-orange-400"
             >
-              $ {price}
+              ${price}
             </CustomText>
 
             <Dot />

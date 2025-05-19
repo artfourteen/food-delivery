@@ -119,13 +119,13 @@ export const PartnerDetailsItemDetailsSheet = forwardRef<BottomSheetMethods>(
                     as="text-subhead"
                     className="font-dm-sans-medium text-orange-400"
                   >
-                    $ 5.99
+                    $5.99
                   </CustomText>
                 </View>
 
                 <CustomButton className="w-64">
                   <CustomText className="text-white font-dm-sans-medium">
-                    Add to Order
+                    Add to Cart
                   </CustomText>
                 </CustomButton>
               </View>
