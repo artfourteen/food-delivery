@@ -1,10 +1,10 @@
 import { Image, Pressable, View } from 'react-native';
-
-import whopper from '@assets/img/partners/whopper.png';
-import { CustomText } from '@shared/ui/custom-text';
+import { CustomText } from '@shared/ui';
 import { useState } from 'react';
 import { Minus, Plus } from 'lucide-react-native';
 import { cn } from '@shared/lib/utils';
+
+import whopper from '@assets/img/partners/whopper.png';
 
 interface ItemCartCardProps {
   className?: string;

@@ -1,7 +1,5 @@
 import { View } from 'react-native';
-import { CustomText } from '@shared/ui/custom-text';
-import { Dot } from '@shared/ui/dot';
-import { CustomButton } from '@shared/ui/custom-button';
+import { CustomButton, CustomText, Dot } from '@shared/ui';
 import { cn } from '@shared/lib/utils';
 
 import ShieldCheck from '@assets/img/icons/shield-check.svg';

@@ -1,18 +1,21 @@
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+import {
+  Container,
+  CustomButton,
+  CustomInput,
+  CustomText,
+  SheetHeader,
+} from '@shared/ui';
 import { forwardRef, useMemo, useState } from 'react';
-import { CustomText } from '@shared/ui/custom-text';
 import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 import { bottomSheetStyles } from '@shared/constants';
 import { Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { cn } from '@shared/lib/utils';
 
 import ShieldCheck from '@assets/img/icons/shield-check.svg';
 import StarOrangeLg from '@assets/img/icons/star-orange-lg.svg';
 import StarGrayLg from '@assets/img/icons/star-gray-lg.svg';
-import { CustomButton } from '@shared/ui/custom-button';
-import { cn } from '@shared/lib/utils';
-import { CustomInput } from '@shared/ui/input';
-import { Container } from '@shared/ui/container';
 
 const reviewToText = (val: number) => {
   switch (val) {
@@ -65,14 +68,7 @@ export const ReviewSheet = forwardRef<BottomSheetMethods>(({}, ref) => {
     >
       <BottomSheetView>
         <Container className="max-w-[85%]">
-          <View className="border-b border-b-gray-100 pb-6">
-            <CustomText
-              as="text-subhead"
-              className="text-center font-dm-sans-bold"
-            >
-              Rate Your Experience
-            </CustomText>
-          </View>
+          <SheetHeader title="Rate Your Experience" />
 
           <View className="items-center justify-center py-9 border-b border-gray-100 gap-3">
             <View className="w-24 h-24 rounded-full bg-orange-50" />

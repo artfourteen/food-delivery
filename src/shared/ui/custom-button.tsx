@@ -14,6 +14,7 @@ const buttonVariants = cva(
         default: 'bg-orange-400 active:bg-orange-300',
         secondary: 'bg-gray-100 active:bg-gray-50',
         outline: 'bg-transparent active:opacity-70 border border-gray-200',
+        ghost: 'bg-transparent active:bg-gray-100',
       },
       size: {
         default: 'py-4 px-4 rounded-2xl',

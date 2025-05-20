@@ -1,9 +1,6 @@
 import { View } from 'react-native';
-import { SearchInput } from '@shared/ui/input';
-import { Container } from '@shared/ui/container';
+import { Container, CustomButton, CustomText, SearchInput } from '@shared/ui';
 import { MapPinHouse, Settings2 } from 'lucide-react-native';
-import { CustomText } from '@shared/ui/custom-text';
-import { CustomButton } from '@shared/ui/custom-button';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useState } from 'react';
 

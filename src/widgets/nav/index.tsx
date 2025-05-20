@@ -1,11 +1,11 @@
 import { Pressable, View } from 'react-native';
 import {
   House,
-  UserRound,
-  ShoppingCart,
   ReceiptText,
+  ShoppingCart,
+  UserRound,
 } from 'lucide-react-native';
-import { CustomText } from '@shared/ui/custom-text';
+import { CustomText } from '@shared/ui';
 import { usePathname, useRouter } from 'expo-router';
 import { cn } from '@shared/lib/utils';
 

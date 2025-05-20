@@ -1,7 +1,6 @@
 import { Pressable, View } from 'react-native';
-import { Container } from '@shared/ui/container';
+import { Container, CustomText } from '@shared/ui';
 import { cn } from '@shared/lib/utils';
-import { CustomText } from '@shared/ui/custom-text';
 import { Dispatch, SetStateAction } from 'react';
 
 export type TabType = 'delivery' | 'review';

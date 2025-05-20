@@ -1,6 +1,5 @@
 import { Pressable, ScrollView, View } from 'react-native';
-import { CustomText } from '@shared/ui/custom-text';
-import { Container } from '@shared/ui/container';
+import { Container, CustomText } from '@shared/ui';
 import { PartnerCardSm } from '@entities/partners/ui';
 import { mockPartners } from '@shared/constants';
 import { useRouter } from 'expo-router';

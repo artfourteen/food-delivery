@@ -1,11 +1,8 @@
 import { View } from 'react-native';
-import { Container } from '@shared/ui/container';
+import { Container, CustomButton, CustomInput, CustomText } from '@shared/ui';
 
 import AuthImg from '@assets/img/auth/auth.svg';
-import { CustomText } from '@shared/ui/custom-text';
 import { useRouter } from 'expo-router';
-import { CustomInput } from '@shared/ui/input/custom-input';
-import { CustomButton } from '@shared/ui/custom-button';
 
 export default function RegisterScreen() {
   const router = useRouter();

@@ -1,7 +1,7 @@
 import { ScrollView, View } from 'react-native';
-import { CustomText } from '@shared/ui/custom-text';
-import { Container } from '@shared/ui/container';
-import { CategoryCard } from '@entities/categories/ui/category-card';
+import { CustomText } from '@shared/ui';
+import { Container } from '@shared/ui';
+import { CategoryCard } from '@entities/categories/ui';
 import { mockCategories } from '@shared/constants';
 
 export const CategoriesSection = () => {

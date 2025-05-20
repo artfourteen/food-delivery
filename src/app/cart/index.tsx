@@ -1,7 +1,5 @@
 import { ScrollView, View } from 'react-native';
-import { CustomText } from '@shared/ui/custom-text';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Container } from '@shared/ui/container';
+import { Container, ScreenHeader } from '@shared/ui';
 import { CartDeliverToSection, CartYourOrderSection } from '@widgets/cart';
 import { CartPaymentSection } from '@widgets/cart/cart-payment-section';
 import { useRef } from 'react';
@@ -17,14 +15,7 @@ export default function CartScreen() {
   return (
     <>
       <View>
-        <SafeAreaView className="bg-white border-b border-gray-200">
-          <CustomText
-            as="text-subhead"
-            className="fixed top-0 z-10 text-center font-dm-sans-medium"
-          >
-            Cart
-          </CustomText>
-        </SafeAreaView>
+        <ScreenHeader title="Cart" />
 
         <ScrollView
           className="pt-4"

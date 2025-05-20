@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Pressable, TextInputProps, View } from 'react-native';
 import { cn } from '@shared/lib/utils';
 import { Eye, EyeClosed } from 'lucide-react-native';
-import { CustomInput } from '@shared/ui/input/custom-input';
+import { CustomInput } from '@shared/ui';
 
 export const PasswordInput = ({
   className,

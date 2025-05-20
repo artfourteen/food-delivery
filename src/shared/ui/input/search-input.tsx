@@ -1,5 +1,5 @@
 import { Pressable, TextInputProps, View } from 'react-native';
-import { CustomInput } from '@shared/ui/input/custom-input';
+import { CustomInput } from '@shared/ui';
 import { CircleX, MapPin } from 'lucide-react-native';
 import { cn } from '@shared/lib/utils';
 

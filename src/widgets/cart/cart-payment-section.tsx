@@ -1,8 +1,7 @@
-import { Container } from '@shared/ui/container';
-import { CustomButton } from '@shared/ui/custom-button';
+import { Container, CustomButton, CustomText } from '@shared/ui';
 import { View } from 'react-native';
-import { CustomText } from '@shared/ui/custom-text';
-import { Banknote, ChevronRight, CreditCard, Plus } from 'lucide-react-native';
+import { ChevronRight, Plus } from 'lucide-react-native';
+import { PaymentCard } from '@features/payment/ui';
 
 interface CartPaymentSectionProps {
   handlePaymentSheetOpen: () => void;
@@ -14,39 +13,14 @@ export const CartPaymentSection = ({
   return (
     <View className="bg-white pt-9 pb-14 mt-4">
       <Container className="max-w-[85%] gap-4">
-        <CustomButton variant="outline" className="justify-between">
-          <View className="flex-row items-center gap-3">
-            <View className="w-12 h-12 rounded-full items-center justify-center bg-gray-100">
-              <Banknote width={24} height={24} />
-            </View>
+        <PaymentCard
+          title="$36.98"
+          subTitle="Cash"
+          variant="pressable"
+          type="card"
+        />
 
-            <View>
-              <CustomText as="text-subhead" className="font-dm-sans-medium">
-                $36.98
-              </CustomText>
-              <CustomText>Cash</CustomText>
-            </View>
-          </View>
-
-          <ChevronRight color="#9ca3af" />
-        </CustomButton>
-
-        <CustomButton variant="outline" className="justify-between">
-          <View className="flex-row items-center gap-3">
-            <View className="w-12 h-12 rounded-full items-center justify-center bg-gray-100">
-              <CreditCard width={24} height={24} />
-            </View>
-
-            <View>
-              <CustomText as="text-subhead" className="font-dm-sans-medium">
-                $36.98
-              </CustomText>
-              <CustomText>PayPal</CustomText>
-            </View>
-          </View>
-
-          <ChevronRight color="#9ca3af" />
-        </CustomButton>
+        <PaymentCard title="$36.98" subTitle="Cash" variant="pressable" />
 
         <CustomButton
           onPress={handlePaymentSheetOpen}

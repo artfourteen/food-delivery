@@ -1,7 +1,5 @@
 import { Pressable, View } from 'react-native';
-import { CustomText } from '@shared/ui/custom-text';
-import { Dot } from '@shared/ui/dot';
-import { Container } from '@shared/ui/container';
+import { Container, CustomText, Dot } from '@shared/ui';
 
 import ShieldCheck from '@assets/img/icons/shield-check.svg';
 import HeartOrange from '@assets/img/icons/heart-orange.svg';

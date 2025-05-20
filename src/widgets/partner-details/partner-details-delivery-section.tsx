@@ -1,6 +1,5 @@
 import { Pressable, View } from 'react-native';
-import { Container } from '@shared/ui/container';
-import { CustomText } from '@shared/ui/custom-text';
+import { Container, CustomText } from '@shared/ui';
 import { ScrollView } from 'react-native-gesture-handler';
 import {
   mockCombosBurger,
@@ -32,7 +31,11 @@ export const PartnerDetailsDeliverySection = ({
           >
             <View className="flex-row items-center gap-2">
               {mockPopularItems.map((item) => (
-                <Pressable key={item.id} onPress={handleOpen}>
+                <Pressable
+                  key={item.id}
+                  onPress={handleOpen}
+                  className="active:opacity-80"
+                >
                   <ItemCard {...item} />
                 </Pressable>
               ))}
@@ -51,7 +54,11 @@ export const PartnerDetailsDeliverySection = ({
 
               <View>
                 {mockCombosBurger.map((item, index) => (
-                  <Pressable key={item.id} onPress={handleOpen}>
+                  <Pressable
+                    key={item.id}
+                    onPress={handleOpen}
+                    className="active:opacity-80"
+                  >
                     <ItemComboCard
                       {...item}
                       className={cn('py-5', {
@@ -77,16 +84,21 @@ export const PartnerDetailsDeliverySection = ({
 
               <View>
                 {mockCombosChicken.map((item, index) => (
-                  <ItemComboCard
+                  <Pressable
                     key={item.id}
-                    {...item}
-                    className={cn('py-5', {
-                      'border-b border-gray-100':
-                        mockCombosChicken.length - 1 !== index,
-                      'pt-5 pb-0': mockCombosChicken.length - 1 === index,
-                      'pt-0 pb-5': index === 0,
-                    })}
-                  />
+                    onPress={handleOpen}
+                    className="active:opacity-80"
+                  >
+                    <ItemComboCard
+                      {...item}
+                      className={cn('py-5', {
+                        'border-b border-gray-100':
+                          mockCombosChicken.length - 1 !== index,
+                        'pt-5 pb-0': mockCombosChicken.length - 1 === index,
+                        'pt-0 pb-5': index === 0,
+                      })}
+                    />
+                  </Pressable>
                 ))}
               </View>
             </View>

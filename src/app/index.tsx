@@ -1,8 +1,7 @@
 import { ScrollView, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useRouter } from 'expo-router';
-import { CustomButton } from '@shared/ui/custom-button';
-import { Container } from '@shared/ui/container';
+import { Container, CustomButton } from '@shared/ui';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Header } from '@widgets/header';
 import { CategoriesSection } from '@widgets/main/categories-section';
@@ -25,7 +24,7 @@ export default function MainScreen() {
 
   return (
     <>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View className="gap-4 pb-9">
           <Header />
 

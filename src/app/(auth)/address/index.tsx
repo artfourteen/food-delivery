@@ -1,10 +1,7 @@
-import { Container } from '@shared/ui/container';
+import { Container, CustomButton, CustomText, SearchInput } from '@shared/ui';
 import { View } from 'react-native';
 
 import AddressImg from '@assets/img/auth/address.svg';
-import { CustomText } from '@shared/ui/custom-text';
-import { CustomButton } from '@shared/ui/custom-button';
-import { SearchInput } from '@shared/ui/input';
 
 export default function AddressScreen() {
   return (

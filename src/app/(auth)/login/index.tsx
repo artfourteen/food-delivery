@@ -1,12 +1,14 @@
 import { View } from 'react-native';
-import { Container } from '@shared/ui/container';
+import {
+  Container,
+  CustomButton,
+  CustomInput,
+  CustomText,
+  PasswordInput,
+} from '@shared/ui';
+import { useRouter } from 'expo-router';
 
 import AuthImg from '@assets/img/auth/auth.svg';
-import { CustomText } from '@shared/ui/custom-text';
-import { useRouter } from 'expo-router';
-import { CustomInput } from '@shared/ui/input/custom-input';
-import { CustomButton } from '@shared/ui/custom-button';
-import { PasswordInput } from '@shared/ui/input/password-input';
 
 export default function LoginScreen() {
   const router = useRouter();

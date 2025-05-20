@@ -1,10 +1,7 @@
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { bottomSheetStyles } from '@shared/constants';
 import { View } from 'react-native';
-import { CustomText } from '@shared/ui/custom-text';
-import { Container } from '@shared/ui/container';
-import { CustomInput } from '@shared/ui/input';
-import { CustomButton } from '@shared/ui/custom-button';
+import { Container, CustomButton, CustomInput, CustomText } from '@shared/ui';
 import { forwardRef, useMemo } from 'react';
 import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 

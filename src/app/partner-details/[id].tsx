@@ -7,11 +7,11 @@ import burgerKingDetails from '@assets/img/partners/burger-king-details.png';
 import {
   PartnerDetailsDeliverySection,
   PartnerDetailsInfoSection,
+  PartnerDetailsItemDetailsSheet,
   PartnerDetailsReviewsSection,
   PartnerDetailsTabsSection,
   TabType,
 } from '@widgets/partner-details';
-import { PartnerDetailsItemDetailsSheet } from '@widgets/partner-details/partner-details-item-details-sheet';
 import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 
 export default function PartnerDetailsScreen() {

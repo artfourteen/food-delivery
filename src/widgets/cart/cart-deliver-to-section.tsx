@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { CustomText } from '@shared/ui/custom-text';
+import { CustomText } from '@shared/ui';
 
 import PinLocation from '@assets/img/icons/pin-location.svg';
 

@@ -1,14 +1,12 @@
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { Image, Pressable, View } from 'react-native';
-import { CustomText } from '@shared/ui/custom-text';
+import { Container, CustomButton, CustomText } from '@shared/ui';
 import { forwardRef, useMemo, useState } from 'react';
 import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { bottomSheetStyles } from '@shared/constants';
-import { Container } from '@shared/ui/container';
 import { cn } from '@shared/lib/utils';
 import { Minus, Plus } from 'lucide-react-native';
-import { CustomButton } from '@shared/ui/custom-button';
 
 import whopper from '@assets/img/partners/whopper.png';
 
@@ -26,14 +24,14 @@ export const PartnerDetailsItemDetailsSheet = forwardRef<BottomSheetMethods>(
     return (
       <BottomSheet
         ref={ref}
-        topInset={top}
-        snapPoints={snapPoints}
-        enablePanDownToClose
         index={-1}
+        topInset={top}
+        enablePanDownToClose
+        snapPoints={snapPoints}
+        enableDynamicSizing={false}
         style={bottomSheetStyles.base}
         handleStyle={bottomSheetStyles.handle}
         handleIndicatorStyle={bottomSheetStyles.handleIndicator}
-        enableDynamicSizing={false}
       >
         <BottomSheetView>
           <Container className="max-w-[85%]">

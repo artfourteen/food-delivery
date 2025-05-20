@@ -1,12 +1,11 @@
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { Pressable, View } from 'react-native';
-import { CustomText } from '@shared/ui/custom-text';
+import { Container, CustomText } from '@shared/ui';
 import { bottomSheetStyles, mockPartners } from '@shared/constants';
-import { PartnerCardMd } from '@entities/partners/ui/partner-card-md';
+import { PartnerCardMd } from '@entities/partners/ui';
 import { forwardRef, useMemo } from 'react';
 import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Container } from '@shared/ui/container';
 import { useRouter } from 'expo-router';
 
 export const PartnersSheet = forwardRef<BottomSheetMethods>((_, ref) => {

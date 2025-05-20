@@ -1,17 +1,15 @@
 import { View } from 'react-native';
-import { Container } from '@shared/ui/container';
-import { CustomText } from '@shared/ui/custom-text';
+import { Container, CustomButton, CustomText } from '@shared/ui';
 import { useState } from 'react';
 import { cn } from '@shared/lib/utils';
-import { CustomButton } from '@shared/ui/custom-button';
 import { ChevronRight } from 'lucide-react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 
 import Onboarding1 from '@assets/img/onboarding/onboarding-1.svg';
 import Onboarding2 from '@assets/img/onboarding/onboarding-2.svg';
 import Onboarding3 from '@assets/img/onboarding/onboarding-3.svg';
-import { StatusBar } from 'expo-status-bar';
 
 export default function OnboardingScreen() {
   const [step, setStep] = useState<number>(1);

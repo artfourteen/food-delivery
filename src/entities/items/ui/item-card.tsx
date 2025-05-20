@@ -1,6 +1,5 @@
 import { View } from 'react-native';
-import { CustomText } from '@shared/ui/custom-text';
-import { Dot } from '@shared/ui/dot';
+import { CustomText, Dot } from '@shared/ui';
 import { ItemEntity } from '@entities/items/model/items';
 
 export const ItemCard = ({ price, name, category }: ItemEntity) => {

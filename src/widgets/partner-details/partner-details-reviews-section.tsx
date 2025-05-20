@@ -1,8 +1,8 @@
 import { View } from 'react-native';
 import { mockPartners } from '@shared/constants';
-import { ReviewCard } from '@entities/reviews/ui/review-card';
+import { ReviewCard } from '@entities/reviews/ui';
 import { cn } from '@shared/lib/utils';
-import { Container } from '@shared/ui/container';
+import { Container } from '@shared/ui';
 
 export const PartnerDetailsReviewsSection = () => {
   return (

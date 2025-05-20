@@ -4,11 +4,10 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import { Container } from '@shared/ui/container';
-import { CustomText } from '@shared/ui/custom-text';
+import { Container, CustomText } from '@shared/ui';
 import { useState } from 'react';
 import { cn } from '@shared/lib/utils';
-import { PartnerCardMd } from '@entities/partners/ui/partner-card-md';
+import { PartnerCardMd } from '@entities/partners/ui';
 import { mockPartners } from '@shared/constants';
 import { useRouter } from 'expo-router';
 

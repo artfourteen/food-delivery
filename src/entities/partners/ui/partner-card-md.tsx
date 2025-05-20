@@ -1,7 +1,6 @@
 import { cn } from '@shared/lib/utils';
 import { Image, View } from 'react-native';
-import { CustomText } from '@shared/ui/custom-text';
-import { Dot } from '@shared/ui/dot';
+import { CustomText, Dot } from '@shared/ui';
 import { Fragment } from 'react';
 import Dollar from '@assets/img/icons/dollar.svg';
 import { PartnerEntity } from '@entities/partners/model/partners';

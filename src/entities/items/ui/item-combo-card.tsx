@@ -1,11 +1,10 @@
-import { Pressable, View, ViewProps } from 'react-native';
-import { CustomText } from '@shared/ui/custom-text';
-import { Dot } from '@shared/ui/dot';
+import { Pressable, View } from 'react-native';
+import { CustomText, Dot } from '@shared/ui';
 import { ItemEntity } from '@entities/items/model/items';
+import { cn } from '@shared/lib/utils';
 
 import StarOrange from '@assets/img/icons/star-orange.svg';
 import StarGray from '@assets/img/icons/star-gray.svg';
-import { cn } from '@shared/lib/utils';
 
 interface IItemComboCardProps extends ItemEntity {
   className?: string;
