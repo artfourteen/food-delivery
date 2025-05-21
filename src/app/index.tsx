@@ -17,7 +17,7 @@ export default function MainScreen() {
 
   const handleClear = async () => {
     await AsyncStorage.removeItem('hasSeenOnboarding');
-    router.push('/onboarding');
+    await AsyncStorage.removeItem('accessToken');
   };
 
   const handleOpenPartnersSheet = () => partnersSheetRef.current?.expand();
@@ -45,6 +45,12 @@ export default function MainScreen() {
               </CustomButton>
               <CustomButton onPress={() => router.push('/(auth)/register')}>
                 <Text className="text-white">Register</Text>
+              </CustomButton>
+              <CustomButton onPress={() => router.push('/(auth)/restore')}>
+                <Text className="text-white">Restore</Text>
+              </CustomButton>
+              <CustomButton onPress={() => router.push('/(auth)/reset')}>
+                <Text className="text-white">Reset</Text>
               </CustomButton>
               <CustomButton onPress={() => router.push('/(auth)/address')}>
                 <Text className="text-white">Address</Text>

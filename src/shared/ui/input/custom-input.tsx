@@ -1,6 +1,7 @@
 import { TextInput, TextInputProps } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@shared/lib/utils';
+import { Controller } from 'react-hook-form';
 
 interface CustomInputProps
   extends TextInputProps,

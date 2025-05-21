@@ -11,7 +11,7 @@ export default function AddressScreen() {
           <AddressImg />
 
           <View className="items-center justify-center gap-2">
-            <CustomText as="h3" className="text-center text-black">
+            <CustomText as="h3" className="text-center">
               Find Nearby Restaurants
             </CustomText>
             <CustomText className="text-gray-500 text-center">

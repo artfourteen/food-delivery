@@ -4,7 +4,7 @@ import { Book, ChevronRight, Star } from 'lucide-react-native';
 
 export const ProfileMoreSection = () => {
   return (
-    <SectionCard title="General">
+    <SectionCard title="More">
       <View className="gap-2">
         <CustomButton variant="ghost" className="justify-between">
           <View className="flex-row items-center gap-3">
@@ -18,7 +18,7 @@ export const ProfileMoreSection = () => {
                 as="text-caption2"
                 className="font-dm-sans-medium text-gray-400"
               >
-                You will receive daily updates
+                Help us improve your experience
               </CustomText>
             </View>
           </View>

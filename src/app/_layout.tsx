@@ -14,8 +14,23 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Nav } from '@widgets/nav';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import Toast from 'react-native-toast-message';
+import { toastConfig } from '@shared/config/toast.config';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 SplashScreen.preventAutoHideAsync();
+
+const routesWithNave = [
+  '/',
+  '/orders',
+  '/cart',
+  '/profile',
+  '/partner-details',
+];
+
+const privateRoutes = ['/', '/orders', '/cart', '/profile', '/partner-details'];
+
+const queryClient = new QueryClient();
 
 export default function RootLayout() {
   const router = useRouter();
@@ -28,36 +43,61 @@ export default function RootLayout() {
     DMSans_800ExtraBold,
     DMSans_900Black,
   });
-  const [isReady, setIsReady] = useState<boolean>(false);
+
+  const [isAppReady, setAppReady] = useState(false);
 
   useEffect(() => {
-    const prepare = async () => {
-      const hasSeen = await AsyncStorage.getItem('hasSeenOnboarding');
+    const initializeApp = async () => {
+      try {
+        const accessToken = await AsyncStorage.getItem('accessToken');
+        const hasSeen = await AsyncStorage.getItem('hasSeenOnboarding');
 
-      if (hasSeen !== 'true' && pathname !== '/onboarding') {
-        router.replace('/onboarding');
+        if (hasSeen !== 'true') {
+          if (pathname !== '/onboarding') {
+            router.replace('/onboarding');
+            return;
+          }
+        }
+
+        if (
+          privateRoutes.includes(pathname) &&
+          !accessToken &&
+          hasSeen === 'true'
+        ) {
+          if (pathname !== '/login') {
+            router.replace('/login');
+            return;
+          }
+        }
+      } catch (e) {
+        console.error('Initialization error:', e);
+      } finally {
+        setAppReady(true);
       }
-
-      setIsReady(true);
     };
 
-    prepare();
-  }, []);
+    if (fontsLoaded || fontsError) {
+      initializeApp();
+    }
+  }, [fontsLoaded, fontsError, pathname]);
 
   useEffect(() => {
-    if ((fontsLoaded || fontsError) && isReady) {
+    if ((fontsLoaded || fontsError) && isAppReady) {
       SplashScreen.hideAsync();
     }
-  }, [fontsLoaded, fontsError, isReady]);
+  }, [fontsLoaded, fontsError, isAppReady]);
 
-  if (!fontsLoaded || !isReady) return null;
+  if (!fontsLoaded || !isAppReady) return null;
 
   return (
-    <SafeAreaProvider>
-      <GestureHandlerRootView>
-        <Stack screenOptions={{ headerShown: false }} />
-        <Nav />
-      </GestureHandlerRootView>
-    </SafeAreaProvider>
+    <QueryClientProvider client={queryClient}>
+      <SafeAreaProvider>
+        <GestureHandlerRootView className="flex-1">
+          <Stack screenOptions={{ headerShown: false }} />
+          {routesWithNave.includes(pathname) && <Nav />}
+          <Toast config={toastConfig} />
+        </GestureHandlerRootView>
+      </SafeAreaProvider>
+    </QueryClientProvider>
   );
 }

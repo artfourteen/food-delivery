@@ -12,9 +12,11 @@ import { bottomSheetStyles } from '@shared/constants';
 import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { View } from 'react-native';
+import { useUser } from '@shared/hooks';
 
 export const ChangeAccountInfoSheet = forwardRef<BottomSheetMethods>(
   (_, ref) => {
+    const { username, email } = useUser();
     const snapPoints = useMemo(() => ['100%'], []);
     const { top } = useSafeAreaInsets();
 
@@ -41,7 +43,7 @@ export const ChangeAccountInfoSheet = forwardRef<BottomSheetMethods>(
                     Full Name
                   </CustomText>
 
-                  <CustomInput />
+                  <CustomInput value={username} />
                 </View>
 
                 <Divide />
@@ -51,17 +53,7 @@ export const ChangeAccountInfoSheet = forwardRef<BottomSheetMethods>(
                     Email Address
                   </CustomText>
 
-                  <CustomInput />
-                </View>
-
-                <Divide />
-
-                <View className="gap-3">
-                  <CustomText as="text-caption" className="text-gray-400">
-                    Phone Number
-                  </CustomText>
-
-                  <CustomInput />
+                  <CustomInput value={email} />
                 </View>
               </View>
 

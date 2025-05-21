@@ -7,7 +7,7 @@ interface CustomButtonProps
     VariantProps<typeof buttonVariants> {}
 
 const buttonVariants = cva(
-  'flex flex-row items-center justify-center gap-2 w-full',
+  'flex flex-row items-center justify-center gap-2 w-full disabled:opacity-50',
   {
     variants: {
       variant: {

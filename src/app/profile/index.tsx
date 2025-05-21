@@ -1,6 +1,5 @@
 import { ScrollView, View } from 'react-native';
-import { Container, CustomButton, CustomText, ScreenHeader } from '@shared/ui';
-import { ChevronRight, LogOut } from 'lucide-react-native';
+import { Container, CustomText, ScreenHeader } from '@shared/ui';
 import {
   ProfileGeneralSection,
   ProfileMoreSection,
@@ -13,8 +12,12 @@ import {
 } from '@features/user/ui';
 import { useRef } from 'react';
 import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
+import { LogoutButton } from '@features/auth/ui';
+import { useUser } from '@shared/hooks';
 
 export default function ProfileScreen() {
+  const { username } = useUser();
+
   const changeAccountSheetRef = useRef<BottomSheetMethods>(null);
   const changePasswordSheetRef = useRef<BottomSheetMethods>(null);
   const paymentMethodsSheetRef = useRef<BottomSheetMethods>(null);
@@ -41,7 +44,7 @@ export default function ProfileScreen() {
               as="text-subhead"
               className="text-center font-dm-sans-medium"
             >
-              Philippe Troussier
+              {username}
             </CustomText>
           </View>
 
@@ -57,20 +60,7 @@ export default function ProfileScreen() {
 
               <ProfileMoreSection />
 
-              <CustomButton
-                variant="ghost"
-                className="justify-between bg-white"
-              >
-                <View className="flex-row items-center gap-3 px-5 py-4">
-                  <LogOut size={18} color="#9ca3af" />
-
-                  <CustomText as="text-caption" className="font-dm-sans-medium">
-                    Logout
-                  </CustomText>
-                </View>
-
-                <ChevronRight color="#9ca3af" />
-              </CustomButton>
+              <LogoutButton />
             </View>
           </Container>
         </ScrollView>

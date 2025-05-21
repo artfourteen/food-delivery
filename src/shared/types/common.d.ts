@@ -1,4 +1,4 @@
-export interface TimeStamps {
+export interface Timestamps {
   createdAt: string;
   updatedAt: string;
 }

@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { Container, CustomButton, CustomText } from '@shared/ui';
 import { useState } from 'react';
 import { cn } from '@shared/lib/utils';
@@ -17,7 +17,7 @@ export default function OnboardingScreen() {
 
   const handleFinish = async () => {
     await AsyncStorage.setItem('hasSeenOnboarding', 'true');
-    router.push('/(auth)/login');
+    router.push('/(auth)/register');
   };
 
   return (
@@ -25,13 +25,13 @@ export default function OnboardingScreen() {
       <Container>
         <View className="h-full items-center justify-between pt-40 pb-20 relative">
           {step !== 3 && (
-            <CustomButton
-              className="absolute top-10 right-0 w-fit"
+            <Pressable
+              className="absolute top-10 right-0 w-fit flex-row items-center gap-1"
               onPress={handleFinish}
             >
               <CustomText>Skip</CustomText>
               <ChevronRight size={14} />
-            </CustomButton>
+            </Pressable>
           )}
 
           {step == 1 && <Onboarding1 width={305} height={305} />}
