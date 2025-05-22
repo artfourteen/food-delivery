@@ -1,32 +1,58 @@
 import { View } from 'react-native';
 import { CustomButton, CustomText, Dot } from '@shared/ui';
-import { cn } from '@shared/lib/utils';
+import { cn, dateToString, handleError } from '@shared/lib/utils';
+import { Dispatch, SetStateAction } from 'react';
+import { OrderEntity } from '@entities/orders/model/orders';
 
 import ShieldCheck from '@assets/img/icons/shield-check.svg';
+import Toast from 'react-native-toast-message';
+import { ordersService } from '@entities/orders/api';
+import { useQueryClient } from '@tanstack/react-query';
 
-interface HistoryCardProps {
+interface HistoryCardProps extends OrderEntity {
   handleOpenReviewSheet: () => void;
-  status: 'inProcess' | 'completed' | 'canceled';
+  setSelectedPartnerId: Dispatch<SetStateAction<string>>;
 }
 
 export const HistoryCard = ({
   handleOpenReviewSheet,
   status,
+  setSelectedPartnerId,
+  createdAt,
+  items,
+  total,
+  id,
 }: HistoryCardProps) => {
+  const queryClient = useQueryClient();
+
+  const handleCancel = async () => {
+    try {
+      await ordersService.cancelOrder(id);
+      await queryClient.invalidateQueries({ queryKey: ['activeOrders'] });
+      await queryClient.invalidateQueries({ queryKey: ['historyOrders'] });
+    } catch (e) {
+      const errorMessage = await handleError(e);
+      Toast.show({
+        type: 'error',
+        text1: errorMessage,
+      });
+    }
+  };
+
   return (
     <View className="bg-white p-4 rounded-2xl">
       <View className="flex-row items-center justify-between border-b border-gray-100 pb-4">
         <CustomText
           as="text-caption"
           className={cn('font-dm-sans-medium', {
-            'text-green-600': status === 'completed',
-            'text-red-500': status === 'canceled',
-            'text-yellow-500': status === 'inProcess',
+            'text-green-600': status === 'DELIVERED',
+            'text-red-500': status === 'CANCELLED',
+            'text-yellow-500': status === 'IN_PROCESS',
           })}
         >
-          {status === 'completed'
+          {status === 'DELIVERED'
             ? 'Completed'
-            : status === 'canceled'
+            : status === 'CANCELLED'
               ? 'Cancelled'
               : 'In process'}
         </CustomText>
@@ -34,7 +60,7 @@ export const HistoryCard = ({
           as="text-caption"
           className="text-gray-400 font-dm-sans-medium"
         >
-          Tuesday, 03 March 2023
+          {dateToString(createdAt)}
         </CustomText>
       </View>
 
@@ -62,7 +88,7 @@ export const HistoryCard = ({
                 as="text-caption"
                 className="font-dm-sans-medium text-orange-400"
               >
-                $40
+                ${total}
               </CustomText>
 
               <Dot />
@@ -71,33 +97,36 @@ export const HistoryCard = ({
                 as="text-caption"
                 className="font-dm-sans-medium text-gray-400"
               >
-                2 items
+                {items.length} items
               </CustomText>
             </View>
           </View>
         </View>
 
-        {(status === 'completed' || status === 'canceled') && (
-          <View className="flex-row items-center gap-3">
-            <CustomButton
-              variant="secondary"
-              className="flex-1"
-              onPress={handleOpenReviewSheet}
-            >
-              <CustomText className="font-dm-sans-medium">Rate</CustomText>
-            </CustomButton>
-            <CustomButton className="flex-1">
-              <CustomText className="text-white font-dm-sans-medium">
-                Re-Order
-              </CustomText>
-            </CustomButton>
-          </View>
-        )}
+        {/*{(status === 'DELIVERED' || status === 'CANCELLED') && (*/}
+        {/*  <View className="flex-row items-center gap-3">*/}
+        {/*    <CustomButton*/}
+        {/*      variant="secondary"*/}
+        {/*      className="flex-1"*/}
+        {/*      onPress={() => {*/}
+        {/*        setSelectedPartnerId('partnerId');*/}
+        {/*        handleOpenReviewSheet();*/}
+        {/*      }}*/}
+        {/*    >*/}
+        {/*      <CustomText className="font-dm-sans-medium">Rate</CustomText>*/}
+        {/*    </CustomButton>*/}
+        {/*    <CustomButton className="flex-1">*/}
+        {/*      <CustomText className="text-white font-dm-sans-medium">*/}
+        {/*        Re-Order*/}
+        {/*      </CustomText>*/}
+        {/*    </CustomButton>*/}
+        {/*  </View>*/}
+        {/*)}*/}
 
-        {status === 'inProcess' && (
-          <CustomButton>
+        {status === 'IN_PROCESS' && (
+          <CustomButton onPress={handleCancel}>
             <CustomText className="text-white font-dm-sans-medium">
-              View on Map
+              Cancel
             </CustomText>
           </CustomButton>
         )}

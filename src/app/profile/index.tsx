@@ -38,7 +38,9 @@ export default function ProfileScreen() {
 
         <ScrollView showsVerticalScrollIndicator={false}>
           <View className="items-center justify-center bg-white py-6 gap-3">
-            <View className="w-24 h-24 rounded-full bg-orange-50" />
+            <View className="w-24 h-24 rounded-full bg-orange-50 capitalize items-center justify-center border border-gray-200">
+              <CustomText as="h1">{username && username[0]}</CustomText>
+            </View>
 
             <CustomText
               as="text-subhead"

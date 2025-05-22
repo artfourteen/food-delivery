@@ -5,6 +5,10 @@ import { cn } from '@shared/lib/utils';
 import { HistoryCard } from '@entities/history/ui';
 import { ReviewSheet } from '@features/review/ui';
 import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
+import {
+  useActiveOrdersQuery,
+  useHistoryOrdersQuery,
+} from '@shared/hooks/query/orders';
 
 type TabType = 'ongoing' | 'history';
 
@@ -12,9 +16,15 @@ const tabs: TabType[] = ['ongoing', 'history'];
 
 export default function OrdersScreen() {
   const [selectedTab, setSelectedTab] = useState<TabType>('ongoing');
+  const [selectedPartnerId, setSelectedPartnerId] = useState<string>('');
   const reviewSheetRef = useRef<BottomSheetMethods>(null);
+  const { data: orderHistory, isPending: isHistoryPending } =
+    useHistoryOrdersQuery();
+  const { data: activeOrders, isPending: isActivePending } =
+    useActiveOrdersQuery();
 
   const handleOpenReviewSheet = () => reviewSheetRef.current?.expand();
+  const handleReviewSheetClose = () => reviewSheetRef.current?.close();
 
   return (
     <>
@@ -49,17 +59,26 @@ export default function OrdersScreen() {
         {selectedTab === 'ongoing' && (
           <ScrollView className="pt-5" showsVerticalScrollIndicator={false}>
             <Container>
-              <View className="gap-4 pb-44">
-                {['inProcess', 'inProcess', 'inProcess', 'inProcess'].map(
-                  (status, i) => (
+              {isActivePending ? (
+                <CustomText className="py-9 text-center text-gray-400">
+                  Loading...
+                </CustomText>
+              ) : !activeOrders || !activeOrders.length ? (
+                <CustomText className="py-9 text-center text-gray-400">
+                  No active orders
+                </CustomText>
+              ) : (
+                <View className="gap-4 pb-44">
+                  {activeOrders.map((order) => (
                     <HistoryCard
-                      key={i}
+                      key={order.id}
                       handleOpenReviewSheet={handleOpenReviewSheet}
-                      status={status as 'completed' | 'canceled' | 'inProcess'}
+                      setSelectedPartnerId={setSelectedPartnerId}
+                      {...order}
                     />
-                  ),
-                )}
-              </View>
+                  ))}
+                </View>
+              )}
             </Container>
           </ScrollView>
         )}
@@ -68,14 +87,25 @@ export default function OrdersScreen() {
           <ScrollView className="pt-5" showsVerticalScrollIndicator={false}>
             <Container>
               <View className="gap-4 pb-44">
-                {['completed', 'canceled', 'completed', 'canceled'].map(
-                  (status, i) => (
-                    <HistoryCard
-                      key={i}
-                      handleOpenReviewSheet={handleOpenReviewSheet}
-                      status={status as 'completed' | 'canceled' | 'inProcess'}
-                    />
-                  ),
+                {isHistoryPending ? (
+                  <CustomText className="py-9 text-center text-gray-400">
+                    Loading...
+                  </CustomText>
+                ) : !orderHistory || !orderHistory.length ? (
+                  <CustomText className="py-9 text-center text-gray-400">
+                    History is clear
+                  </CustomText>
+                ) : (
+                  <View className="gap-4 pb-44">
+                    {orderHistory.map((order) => (
+                      <HistoryCard
+                        key={order.id}
+                        handleOpenReviewSheet={handleOpenReviewSheet}
+                        setSelectedPartnerId={setSelectedPartnerId}
+                        {...order}
+                      />
+                    ))}
+                  </View>
                 )}
               </View>
             </Container>
@@ -83,7 +113,12 @@ export default function OrdersScreen() {
         )}
       </View>
 
-      <ReviewSheet ref={reviewSheetRef} />
+      <ReviewSheet
+        ref={reviewSheetRef}
+        partnerId={selectedPartnerId}
+        partnerName="Test"
+        close={handleReviewSheetClose}
+      />
     </>
   );
 }

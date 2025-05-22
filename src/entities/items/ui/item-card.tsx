@@ -2,7 +2,7 @@ import { View } from 'react-native';
 import { CustomText, Dot } from '@shared/ui';
 import { ItemEntity } from '@entities/items/model/items';
 
-export const ItemCard = ({ price, name, category }: ItemEntity) => {
+export const ItemCard = ({ price, name, categories }: ItemEntity) => {
   return (
     <View className="w-[145px]">
       <View className="h-[145px] rounded-2xl bg-orange-50 mb-2" />
@@ -18,8 +18,8 @@ export const ItemCard = ({ price, name, category }: ItemEntity) => {
 
         <Dot />
 
-        <CustomText as="text-caption2" className="text-gray-400">
-          {category}
+        <CustomText as="text-caption2" className="text-gray-400 capitalize">
+          {categories[0].toLowerCase()}
         </CustomText>
       </View>
     </View>

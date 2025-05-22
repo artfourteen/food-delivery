@@ -1,7 +1,10 @@
-export const mockCategories = [
-  'Sandwich',
+export const categories = [
   'Pizza',
+  'Drinks',
+  'Dessert',
+  'Vegan',
   'Burgers',
-  'Sushi',
-  'Pasta',
+  'Chicken',
+  'Seafood',
+  'Salads',
 ];

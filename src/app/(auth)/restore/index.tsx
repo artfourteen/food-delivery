@@ -1,9 +1,13 @@
-import { Container, CustomButton, CustomInput, CustomText } from '@shared/ui';
-import { View } from 'react-native';
+import { Container, CustomText } from '@shared/ui';
+import { Pressable, View } from 'react-native';
 
 import AuthImg from '@assets/img/auth/auth.svg';
+import { RestoreForm } from '@features/auth/ui';
+import { useRouter } from 'expo-router';
 
 export default function RestoreScreen() {
+  const router = useRouter();
+
   return (
     <View className="bg-white flex-1 items-center justify-center">
       <Container>
@@ -21,19 +25,19 @@ export default function RestoreScreen() {
             </View>
 
             <View className="gap-4">
-              <View className="w-full gap-2">
-                <CustomInput
-                  keyboardType="email-address"
-                  inputMode="email"
-                  placeholder="Email"
-                />
-              </View>
+              <RestoreForm />
 
-              <CustomButton>
-                <CustomText className="text-white font-dm-sans-medium">
-                  Send Reset Link
+              <Pressable
+                onPress={() => router.push('/(auth)/login')}
+                className="self-center active:opacity-80"
+              >
+                <CustomText
+                  as="text-caption"
+                  className="text-orange-400 font-dm-sans-medium"
+                >
+                  Back
                 </CustomText>
-              </CustomButton>
+              </Pressable>
             </View>
           </View>
         </View>

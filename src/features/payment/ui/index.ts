@@ -1,2 +1,2 @@
 export * from './add-payment-method-sheet';
-export * from './payment-card';
+export * from '@entities/payment-cards/ui/payment-card';

@@ -1,10 +1,18 @@
-import { ScrollView, View } from 'react-native';
-import { CustomText } from '@shared/ui';
-import { Container } from '@shared/ui';
+import { Pressable, ScrollView, View } from 'react-native';
+import { Container, CustomText } from '@shared/ui';
 import { CategoryCard } from '@entities/categories/ui';
-import { mockCategories } from '@shared/constants';
+import { categories } from '@shared/constants';
+import { Dispatch, SetStateAction } from 'react';
 
-export const CategoriesSection = () => {
+interface CategoriesSectionProps {
+  setSelectedCategory: Dispatch<SetStateAction<string>>;
+  openSheet: () => void;
+}
+
+export const CategoriesSection = ({
+  setSelectedCategory,
+  openSheet,
+}: CategoriesSectionProps) => {
   return (
     <Container>
       <View className="bg-white rounded-2xl">
@@ -20,8 +28,16 @@ export const CategoriesSection = () => {
           contentContainerClassName="flex-grow p-4"
         >
           <View className="flex-row gap-5">
-            {mockCategories.map((category) => (
-              <CategoryCard key={category} category={category} />
+            {categories.map((category, index) => (
+              <Pressable
+                key={index}
+                onPress={() => {
+                  setSelectedCategory(category);
+                  openSheet();
+                }}
+              >
+                <CategoryCard key={category} category={category} />
+              </Pressable>
             ))}
           </View>
         </ScrollView>

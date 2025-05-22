@@ -17,18 +17,24 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Toast from 'react-native-toast-message';
 import { toastConfig } from '@shared/config/toast.config';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { match } from 'path-to-regexp';
 
 SplashScreen.preventAutoHideAsync();
 
-const routesWithNave = [
+const privateRoutes = [
   '/',
   '/orders',
   '/cart',
   '/profile',
-  '/partner-details',
+  '/partner-details/:id',
 ];
-
-const privateRoutes = ['/', '/orders', '/cart', '/profile', '/partner-details'];
+const authRoutes = [
+  '/(auth)/login',
+  '/(auth)/register',
+  '/(auth)/restore',
+  '/(auth)/reset',
+  '/(auth)/address',
+];
 
 const queryClient = new QueryClient();
 
@@ -46,28 +52,40 @@ export default function RootLayout() {
 
   const [isAppReady, setAppReady] = useState(false);
 
+  const showNav = privateRoutes.some((route) => {
+    const matcher = match(route, { decode: decodeURIComponent });
+    return matcher(pathname);
+  });
+
   useEffect(() => {
     const initializeApp = async () => {
       try {
         const accessToken = await AsyncStorage.getItem('accessToken');
         const hasSeen = await AsyncStorage.getItem('hasSeenOnboarding');
 
+        const normalizedPathname = pathname.replace('/(auth)', '');
+
         if (hasSeen !== 'true') {
-          if (pathname !== '/onboarding') {
+          if (normalizedPathname !== '/onboarding') {
             router.replace('/onboarding');
             return;
           }
         }
 
         if (
-          privateRoutes.includes(pathname) &&
+          privateRoutes.includes(normalizedPathname) &&
           !accessToken &&
           hasSeen === 'true'
         ) {
-          if (pathname !== '/login') {
-            router.replace('/login');
+          if (normalizedPathname !== '/login') {
+            router.replace('/(auth)/login');
             return;
           }
+        }
+
+        if (accessToken && authRoutes.includes(pathname)) {
+          router.replace('/');
+          return;
         }
       } catch (e) {
         console.error('Initialization error:', e);
@@ -94,7 +112,7 @@ export default function RootLayout() {
       <SafeAreaProvider>
         <GestureHandlerRootView className="flex-1">
           <Stack screenOptions={{ headerShown: false }} />
-          {routesWithNave.includes(pathname) && <Nav />}
+          {showNav && <Nav />}
           <Toast config={toastConfig} />
         </GestureHandlerRootView>
       </SafeAreaProvider>

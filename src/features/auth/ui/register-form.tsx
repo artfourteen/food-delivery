@@ -14,7 +14,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import Toast from 'react-native-toast-message';
 
-const registerScheme = z
+const registerSchema = z
   .object({
     username: z.string().min(3, 'Username should be at least 3 characters'),
     email: z
@@ -29,7 +29,7 @@ const registerScheme = z
     path: ['confirmPassword'],
   });
 
-type RegisterFormData = z.infer<typeof registerScheme>;
+type RegisterFormData = z.infer<typeof registerSchema>;
 
 export const RegisterForm = () => {
   const {
@@ -37,7 +37,7 @@ export const RegisterForm = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<RegisterFormData>({
-    resolver: zodResolver(registerScheme),
+    resolver: zodResolver(registerSchema),
     defaultValues: {
       username: '',
       email: '',

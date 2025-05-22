@@ -1,25 +1,27 @@
-import { Pressable, View } from 'react-native';
+import { View } from 'react-native';
 import { CustomText } from '@shared/ui';
 import { ReviewEntity } from '@entities/reviews/model';
 
 import StarOrangeSm from '@assets/img/icons/star-orange-sm.svg';
 import StarGraySm from '@assets/img/icons/star-gray-sm.svg';
-import HeartOrange from '@assets/img/icons/heart-orange.svg';
-import HeartGray from '@assets/img/icons/heart-gray.svg';
+import { ReviewLikeDislikeButton } from '@features/review/ui';
+import { dateToString } from '@shared/lib/utils';
 
 interface ReviewCardProps extends ReviewEntity {
   className?: string;
 }
 
 export const ReviewCard = ({
+  id,
   rating,
-  liked,
-  likesCount,
+  likes,
   createdAt,
-  description,
+  comment,
   user,
+  isLiked,
   className,
-}: ReviewCardProps) => {
+  partnerId,
+}: ReviewCardProps & { partnerId: string }) => {
   return (
     <View className={className}>
       <View className="flex-row gap-4 items-stretch">
@@ -28,14 +30,14 @@ export const ReviewCard = ({
             as="text-caption"
             className="uppercase font-dm-sans-semibold"
           >
-            {user[0]}
+            {user.username[0]}
           </CustomText>
         </View>
 
         <View className="flex-row items-start justify-between gap-4 flex-1">
           <View className="justify-between">
             <CustomText as="text-caption" className="font-medium">
-              {user}
+              {user.username}
             </CustomText>
 
             <View className="flex-row items-center gap-px">
@@ -49,7 +51,7 @@ export const ReviewCard = ({
           </View>
 
           <CustomText as="text-caption2" className="text-gray-400 font-medium">
-            {createdAt}
+            {dateToString(createdAt)}
           </CustomText>
         </View>
       </View>
@@ -58,18 +60,15 @@ export const ReviewCard = ({
         as="text-caption2"
         className="text-pretty mt-2 mb-1 leading-5"
       >
-        {description}
+        {comment}
       </CustomText>
 
-      <Pressable className="flex-row gap-0.5 items-center">
-        {liked ? <HeartOrange /> : <HeartGray />}
-        <CustomText
-          as="text-caption2"
-          className="font-dm-sans-medium text-orange-400"
-        >
-          {likesCount} likes
-        </CustomText>
-      </Pressable>
+      <ReviewLikeDislikeButton
+        id={id}
+        likes={likes}
+        isLiked={isLiked}
+        partnerId={partnerId}
+      />
     </View>
   );
 };

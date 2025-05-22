@@ -10,6 +10,24 @@ export interface RegisterReq {
   confirmPassword: string;
 }
 
+export interface RestoreReq {
+  email: string;
+}
+
+export interface ResetReq {
+  token: string;
+  newPassword: string;
+  confirmNewPassword: string;
+}
+
 export interface AuthRes {
   accessToken: string;
+}
+
+export interface RestoreRes {
+  message: string;
+}
+
+export interface ResetRes {
+  message: string;
 }

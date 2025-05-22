@@ -1,26 +1,29 @@
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { useRouter } from 'expo-router';
-import { Container, CustomButton } from '@shared/ui';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Header } from '@widgets/header';
 import { CategoriesSection } from '@widgets/main/categories-section';
 import { PartnersSection } from '@widgets/main/partners-section';
 import { FilterPartnersSection } from '@widgets/main/filter-partners-section';
 import { PartnersSheet } from '@widgets/main/partners-sheet';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
+import { CategoriesSheet } from '@widgets/main/categories-sheet';
+import { PartnerDetailsItemDetailsSheet } from '@widgets/partner-details';
 
 export default function MainScreen() {
-  const router = useRouter();
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [selectedItemId, setSelectedItemId] = useState<string>('');
   const partnersSheetRef = useRef<BottomSheetMethods>(null);
+  const categoriesSheetRef = useRef<BottomSheetMethods>(null);
+  const itemDetailsSheetRef = useRef<BottomSheetMethods>(null);
 
-  const handleClear = async () => {
-    await AsyncStorage.removeItem('hasSeenOnboarding');
-    await AsyncStorage.removeItem('accessToken');
-  };
-
+  const handleCategoriesSheetOpen = () => categoriesSheetRef.current?.expand();
   const handleOpenPartnersSheet = () => partnersSheetRef.current?.expand();
+  const handleItemDetailsOpen = (itemId: string) => {
+    setSelectedItemId(itemId);
+    itemDetailsSheetRef.current?.expand();
+  };
+  const handleItemDetailsClose = () => itemDetailsSheetRef.current?.close();
 
   return (
     <>
@@ -28,43 +31,30 @@ export default function MainScreen() {
         <View className="gap-4 pb-9">
           <Header />
 
-          <CategoriesSection />
+          <CategoriesSection
+            setSelectedCategory={setSelectedCategory}
+            openSheet={handleCategoriesSheetOpen}
+          />
 
           <PartnersSection handleOpenSheet={handleOpenPartnersSheet} />
 
           <FilterPartnersSection />
 
-          <Container className="mt-10">
-            <View className="items-center justify-center gap-3">
-              <Text>React Native Init</Text>
-              <CustomButton onPress={() => router.push('/onboarding')}>
-                <Text className="text-white">Onboarding</Text>
-              </CustomButton>
-              <CustomButton onPress={() => router.push('/(auth)/login')}>
-                <Text className="text-white">Login</Text>
-              </CustomButton>
-              <CustomButton onPress={() => router.push('/(auth)/register')}>
-                <Text className="text-white">Register</Text>
-              </CustomButton>
-              <CustomButton onPress={() => router.push('/(auth)/restore')}>
-                <Text className="text-white">Restore</Text>
-              </CustomButton>
-              <CustomButton onPress={() => router.push('/(auth)/reset')}>
-                <Text className="text-white">Reset</Text>
-              </CustomButton>
-              <CustomButton onPress={() => router.push('/(auth)/address')}>
-                <Text className="text-white">Address</Text>
-              </CustomButton>
-              <CustomButton variant="secondary" onPress={handleClear}>
-                <Text>Clear storage</Text>
-              </CustomButton>
-            </View>
-          </Container>
           <StatusBar style="auto" backgroundColor="white" />
         </View>
       </ScrollView>
 
       <PartnersSheet ref={partnersSheetRef} />
+      <CategoriesSheet
+        ref={categoriesSheetRef}
+        category={selectedCategory}
+        itemDetailsOpen={handleItemDetailsOpen}
+      />
+      <PartnerDetailsItemDetailsSheet
+        ref={itemDetailsSheetRef}
+        id={selectedItemId}
+        close={handleItemDetailsClose}
+      />
     </>
   );
 }

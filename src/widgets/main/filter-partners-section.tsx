@@ -10,14 +10,46 @@ import { cn } from '@shared/lib/utils';
 import { PartnerCardMd } from '@entities/partners/ui';
 import { mockPartners } from '@shared/constants';
 import { useRouter } from 'expo-router';
+import { getPartnersQuery } from '@shared/hooks/query';
+import {
+  LoadingPartners,
+  PartnersNotFound,
+} from '@widgets/main/partners-section';
 
-type TabType = 'nearby' | 'sales' | 'rate' | 'fast';
+type TabType = 'nearby' | 'cheap' | 'rate' | 'fast';
 
-const tabs: TabType[] = ['nearby', 'sales', 'rate', 'fast'];
+const tabs: TabType[] = ['nearby', 'cheap', 'rate', 'fast'];
 
 export const FilterPartnersSection = () => {
+  const { data: partners, isPending } = getPartnersQuery();
   const [selectedTab, setSelectedTab] = useState<TabType>('nearby');
   const router = useRouter();
+
+  const renderContent = () => {
+    if (isPending) {
+      return <LoadingPartners />;
+    } else if (!partners || !partners.length) {
+      return <PartnersNotFound />;
+    } else {
+      return (
+        <View>
+          {partners.map((partner, index) => (
+            <Pressable
+              key={partner.id}
+              onPress={() => router.push(`/partner-details/${partner.id}`)}
+              className="active:opacity-80"
+            >
+              <PartnerCardMd
+                {...partner}
+                withUnderLine={mockPartners.length - 1 !== index}
+                className="p-8"
+              />
+            </Pressable>
+          ))}
+        </View>
+      );
+    }
+  };
 
   return (
     <Container>
@@ -43,21 +75,7 @@ export const FilterPartnersSection = () => {
         </View>
 
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View>
-            {mockPartners.map((partner, index) => (
-              <Pressable
-                key={partner.id}
-                onPress={() => router.push(`/partner-details/${partner.id}`)}
-                className="active:opacity-80"
-              >
-                <PartnerCardMd
-                  {...partner}
-                  withUnderLine={mockPartners.length - 1 !== index}
-                  className="p-8"
-                />
-              </Pressable>
-            ))}
-          </View>
+          {renderContent()}
         </TouchableWithoutFeedback>
       </View>
     </Container>

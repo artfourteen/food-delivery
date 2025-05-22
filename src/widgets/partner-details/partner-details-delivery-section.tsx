@@ -1,21 +1,25 @@
 import { Pressable, View } from 'react-native';
 import { Container, CustomText } from '@shared/ui';
 import { ScrollView } from 'react-native-gesture-handler';
-import {
-  mockCombosBurger,
-  mockCombosChicken,
-  mockPopularItems,
-} from '@shared/constants';
+import { mockCombosBurger, mockCombosChicken } from '@shared/constants';
 import { ItemCard, ItemComboCard } from '@entities/items/ui';
 import { cn } from '@shared/lib/utils';
+import { useItemsByPartnerQuery } from '@shared/hooks/query';
+import { Dispatch, SetStateAction } from 'react';
 
 interface PartnerDetailsDeliveryProps {
   handleOpen: () => void;
+  partnerId: string;
+  setSelectedId: Dispatch<SetStateAction<string>>;
 }
 
 export const PartnerDetailsDeliverySection = ({
   handleOpen,
+  partnerId,
+  setSelectedId,
 }: PartnerDetailsDeliveryProps) => {
+  const { data: items, isPending } = useItemsByPartnerQuery(partnerId);
+
   return (
     <View className="my-8">
       <View className="pb-5 border-b border-gray-100">
@@ -29,17 +33,30 @@ export const PartnerDetailsDeliverySection = ({
             contentContainerClassName="flex-grow"
             showsHorizontalScrollIndicator={false}
           >
-            <View className="flex-row items-center gap-2">
-              {mockPopularItems.map((item) => (
-                <Pressable
-                  key={item.id}
-                  onPress={handleOpen}
-                  className="active:opacity-80"
-                >
-                  <ItemCard {...item} />
-                </Pressable>
-              ))}
-            </View>
+            {isPending ? (
+              <CustomText className="py-9 text-center text-gray-400">
+                Loading...
+              </CustomText>
+            ) : !items || !items.length ? (
+              <CustomText className="py-9 text-center text-gray-400">
+                Items not found
+              </CustomText>
+            ) : (
+              <View className="flex-row items-center gap-2">
+                {items.map((item) => (
+                  <Pressable
+                    key={item.id}
+                    onPress={() => {
+                      handleOpen();
+                      setSelectedId(item.id);
+                    }}
+                    className="active:opacity-80"
+                  >
+                    <ItemCard {...item} />
+                  </Pressable>
+                ))}
+              </View>
+            )}
           </ScrollView>
         </Container>
       </View>

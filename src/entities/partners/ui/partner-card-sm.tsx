@@ -5,15 +5,19 @@ import { PartnerEntity } from '@entities/partners/model/partners';
 import ShieldCheck from '@assets/img/icons/shield-check.svg';
 import StarWhite from '@assets/img/icons/star-white.svg';
 import subway from '@assets/img/partners/subway.png';
+import { isOpenNow } from '@shared/lib/utils';
 
 export const PartnerCardSm = ({
-  open,
   name,
   distance,
   rating,
   address,
-  freeShipping,
+  deliveryFee,
+  openFrom,
+  openTo,
 }: PartnerEntity) => {
+  const open = isOpenNow(openFrom, openTo);
+
   return (
     <View>
       <View className="min-w-[205px] max-h-[116px] rounded-2xl overflow-hidden bg-orange-50 mb-4">
@@ -61,7 +65,7 @@ export const PartnerCardSm = ({
             as="text-caption2"
             className="font-dm-sans-medium text-white"
           >
-            {rating}
+            {rating ?? 0}
           </CustomText>
         </View>
 
@@ -74,7 +78,7 @@ export const PartnerCardSm = ({
           {distance}km
         </CustomText>
 
-        {freeShipping && (
+        {!deliveryFee && (
           <>
             <Dot />
 

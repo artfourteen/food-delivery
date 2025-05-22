@@ -34,7 +34,7 @@ export default function LoginScreen() {
               <LoginForm />
 
               <Pressable
-                onPress={() => router.push('/(auth)/reset')}
+                onPress={() => router.push('/(auth)/restore')}
                 className="self-center active:opacity-80"
               >
                 <CustomText

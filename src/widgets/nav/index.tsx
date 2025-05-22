@@ -8,8 +8,10 @@ import {
 import { CustomText } from '@shared/ui';
 import { usePathname, useRouter } from 'expo-router';
 import { cn } from '@shared/lib/utils';
+import { useCartQuery } from '@shared/hooks/query/cart/use-cart-query';
 
 export const Nav = () => {
+  const { data: cart } = useCartQuery();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -46,9 +48,16 @@ export const Nav = () => {
       </Pressable>
 
       <Pressable
-        className="items-center py-4 w-1/4"
+        className="items-center py-4 w-1/4 relative"
         onPress={() => router.push('/cart')}
       >
+        {cart && !!cart.items.length && (
+          <View className="absolute top-2 right-9 z-10 bg-orange-400 w-5 h-5 rounded-full items-center justify-center">
+            <CustomText as="text-caption2" className="text-white">
+              {cart.items.length}
+            </CustomText>
+          </View>
+        )}
         <ShoppingCart color={pathname === '/cart' ? '#fb923c' : '#9ca3af'} />
         <CustomText
           as="text-caption2"

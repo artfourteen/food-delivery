@@ -7,6 +7,7 @@ interface PaymentCardProps {
   type?: 'cash' | 'card';
   title: string;
   subTitle?: string;
+  onPress?: () => void;
 }
 
 export const PaymentCard = ({
@@ -14,13 +15,18 @@ export const PaymentCard = ({
   type = 'card',
   title,
   subTitle,
+  onPress,
 }: PaymentCardProps) => {
   if (variant === 'preview') {
     return (
       <View className="flex-row items-center justify-between w-full bg-transparent border border-gray-200 py-4 px-4 rounded-2xl">
         <View className="flex-row items-center gap-3">
           <View className="w-12 h-12 rounded-full items-center justify-center bg-gray-100">
-            <Banknote width={24} height={24} />
+            {type === 'card' ? (
+              <CreditCard width={24} height={24} />
+            ) : (
+              <Banknote width={24} height={24} />
+            )}
           </View>
 
           <View>
@@ -37,7 +43,11 @@ export const PaymentCard = ({
   }
 
   return (
-    <CustomButton variant="outline" className="justify-between">
+    <CustomButton
+      variant="outline"
+      className="justify-between"
+      onPress={onPress}
+    >
       <View className="flex-row items-center gap-3">
         <View className="w-12 h-12 rounded-full items-center justify-center bg-gray-100">
           {type === 'card' ? (

@@ -1,7 +1,13 @@
-export interface ItemEntity {
+import { Timestamps } from '@shared/types';
+
+export type ItemSizeType = 'SM' | 'MD' | 'LG';
+
+export interface ItemEntity extends Timestamps {
   id: string;
   name: string;
   price: number;
-  category: string;
-  liked: boolean;
+  imageUrl: string;
+  categories: string[];
+  availableAmount: number;
+  sizes: ItemSizeType[];
 }

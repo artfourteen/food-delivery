@@ -1,13 +1,18 @@
 import { ReviewEntity } from '@entities/reviews/model';
+import { Timestamps } from '@shared/types';
 
-export interface PartnerEntity {
+export interface PartnerEntity extends Timestamps {
   id: string;
   name: string;
   address: string;
-  rating: number;
+  averageWaitTime: number;
+  openFrom: string;
+  openTo: string;
+  tags?: string[];
+  rating?: number;
+  logoUrl?: string;
+  coverImageUrl?: string;
+  deliveryFee?: number;
   distance: number;
-  freeShipping: boolean;
-  open: boolean;
-  categories: string[];
   reviews: ReviewEntity[];
 }

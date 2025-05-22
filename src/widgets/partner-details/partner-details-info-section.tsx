@@ -1,32 +1,37 @@
-import { Pressable, View } from 'react-native';
+import { View } from 'react-native';
 import { Container, CustomText, Dot } from '@shared/ui';
+import { PartnerEntity } from '@entities/partners/model/partners';
+import { isOpenNow } from '@shared/lib/utils';
 
 import ShieldCheck from '@assets/img/icons/shield-check.svg';
-import HeartOrange from '@assets/img/icons/heart-orange.svg';
 import StarWhite from '@assets/img/icons/star-white.svg';
 import PinLocation from '@assets/img/icons/pin-location.svg';
 import Dollar from '@assets/img/icons/dollar.svg';
 
-export const PartnerDetailsInfoSection = () => {
+export const PartnerDetailsInfoSection = ({
+  name,
+  address,
+  rating,
+  averageWaitTime,
+  deliveryFee,
+  openFrom,
+  openTo,
+}: PartnerEntity) => {
+  const open = isOpenNow(openFrom, openTo);
+
   return (
     <>
       <Container className="max-w-[85%]">
         <View className="gap-1 pb-4 mb-6 border-b border-gray-100">
-          <View className="flex-row items-center justify-between">
-            <View className="flex-row items-center gap-1">
-              <CustomText as="headline" className="font-dm-sans-medium">
-                Burger King
-              </CustomText>
-              <ShieldCheck />
-            </View>
-
-            <Pressable>
-              <HeartOrange />
-            </Pressable>
+          <View className="flex-row items- justify-between">
+            <CustomText as="headline" className="font-dm-sans-medium">
+              {name}
+            </CustomText>
+            <ShieldCheck />
           </View>
 
           <View className="flex-row items-center gap-2 flex-wrap">
-            {true ? (
+            {open ? (
               <CustomText
                 as="text-caption"
                 className="text-green-600 font-dm-sans-medium"
@@ -48,7 +53,7 @@ export const PartnerDetailsInfoSection = () => {
               as="text-caption"
               className="font-dm-sans-medium text-gray-400"
             >
-              1453 W Manchester Ave Los Angeles 90047
+              {address}
             </CustomText>
           </View>
         </View>
@@ -63,7 +68,7 @@ export const PartnerDetailsInfoSection = () => {
                 as="text-caption"
                 className="font-dm-sans-medium text-white"
               >
-                4.5
+                {rating ?? 0}
               </CustomText>
             </View>
 
@@ -75,11 +80,11 @@ export const PartnerDetailsInfoSection = () => {
                 as="text-caption"
                 className="font-dm-sans-medium text-gray-800"
               >
-                15 Mins
+                {averageWaitTime} Mins
               </CustomText>
             </View>
 
-            {true && (
+            {!deliveryFee && (
               <>
                 <Dot className="ml-3 mr-1.5" />
 

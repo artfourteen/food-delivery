@@ -10,7 +10,7 @@ import { authService } from '@features/auth/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 
-const loginScheme = z.object({
+const loginSchema = z.object({
   email: z
     .string()
     .min(1, 'Email field is required')
@@ -18,7 +18,7 @@ const loginScheme = z.object({
   password: z.string().min(1, 'Password field is required'),
 });
 
-type LoginFormData = z.infer<typeof loginScheme>;
+type LoginFormData = z.infer<typeof loginSchema>;
 
 export const LoginForm = () => {
   const {
@@ -26,7 +26,7 @@ export const LoginForm = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormData>({
-    resolver: zodResolver(loginScheme),
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: '',
       password: '',

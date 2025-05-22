@@ -5,47 +5,84 @@ import { forwardRef, useMemo, useState } from 'react';
 import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { bottomSheetStyles } from '@shared/constants';
-import { cn } from '@shared/lib/utils';
+import { cn, handleError } from '@shared/lib/utils';
 import { Minus, Plus } from 'lucide-react-native';
 
 import whopper from '@assets/img/partners/whopper.png';
+import { useItemQuery } from '@shared/hooks/query';
+import { ItemSizeType } from '@entities/items/model';
+import Toast from 'react-native-toast-message';
+import { cartService } from '@entities/cart/api';
+import { useQueryClient } from '@tanstack/react-query';
 
-type SizeType = 'sm' | 'md' | 'lg';
+interface PartnerDetailsItemDetailsSheetProps {
+  id: string;
+  close: () => void;
+}
 
-const sizes: SizeType[] = ['sm', 'md', 'lg'];
+export const PartnerDetailsItemDetailsSheet = forwardRef<
+  BottomSheetMethods,
+  PartnerDetailsItemDetailsSheetProps
+>(({ id, close }, ref) => {
+  const { data: item, isPending } = useItemQuery(id);
+  const snapPoints = useMemo(() => ['100%'], []);
+  const { top } = useSafeAreaInsets();
+  const [selectedSize, setSelectedSize] = useState<ItemSizeType>('MD');
+  const [count, setCount] = useState<number>(1);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const queryClient = useQueryClient();
 
-export const PartnerDetailsItemDetailsSheet = forwardRef<BottomSheetMethods>(
-  ({}, ref) => {
-    const snapPoints = useMemo(() => ['100%'], []);
-    const { top } = useSafeAreaInsets();
-    const [selectedSize, setSelectedSize] = useState<SizeType>('md');
-    const [count, setCount] = useState<number>(1);
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
 
-    return (
-      <BottomSheet
-        ref={ref}
-        index={-1}
-        topInset={top}
-        enablePanDownToClose
-        snapPoints={snapPoints}
-        enableDynamicSizing={false}
-        style={bottomSheetStyles.base}
-        handleStyle={bottomSheetStyles.handle}
-        handleIndicatorStyle={bottomSheetStyles.handleIndicator}
-      >
-        <BottomSheetView>
+    try {
+      await cartService.addItem({
+        itemId: id,
+        size: selectedSize,
+        quantity: count,
+      });
+      await queryClient.invalidateQueries({
+        queryKey: ['cart'],
+      });
+      close();
+    } catch (e) {
+      const errorMessage = await handleError(e);
+      Toast.show({
+        type: 'error',
+        text1: errorMessage,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <BottomSheet
+      ref={ref}
+      index={-1}
+      topInset={top}
+      enablePanDownToClose
+      snapPoints={snapPoints}
+      enableDynamicSizing={false}
+      style={bottomSheetStyles.base}
+      handleStyle={bottomSheetStyles.handle}
+      handleIndicatorStyle={bottomSheetStyles.handleIndicator}
+    >
+      <BottomSheetView>
+        {isPending ? (
+          <CustomText className="text-center py-9 text-gray-400">
+            Loading...
+          </CustomText>
+        ) : !item ? (
+          <CustomText className="text-center py-9 text-gray-400">
+            Item not found
+          </CustomText>
+        ) : (
           <Container className="max-w-[85%]">
             <View className="pt-4 pb-8 justify-between h-full">
               <View className="gap-2 mb-8">
                 <CustomText as="h3" className="font-dm-sans-medium text-center">
-                  Extreme cheese whopper JR
-                </CustomText>
-
-                <CustomText
-                  as="text-caption"
-                  className="font-dm-sans-medium text-center text-gray-400 text-pretty"
-                >
-                  A signature flame-grilled beef patty topped with smoked bacon.
+                  {item.name}
                 </CustomText>
               </View>
 
@@ -59,7 +96,7 @@ export const PartnerDetailsItemDetailsSheet = forwardRef<BottomSheetMethods>(
                 </View>
 
                 <View className="flex-row items-center justify-center gap-10 mb-14">
-                  {sizes.map((size) => (
+                  {item?.sizes?.map((size) => (
                     <Pressable
                       key={size}
                       onPress={() => setSelectedSize(size)}
@@ -86,9 +123,7 @@ export const PartnerDetailsItemDetailsSheet = forwardRef<BottomSheetMethods>(
                     onPress={() => setCount((prevState) => prevState - 1)}
                     className="bg-amber-100 active:opacity-80 rounded-full w-12 h-12 items-center justify-center disabled:opacity-50"
                   >
-                    <CustomText>
-                      <Minus stroke="#fb923c" />
-                    </CustomText>
+                    <Minus stroke="#fb923c" />
                   </Pressable>
 
                   <View className="w-10 h-10 items-center justify-center">
@@ -101,9 +136,7 @@ export const PartnerDetailsItemDetailsSheet = forwardRef<BottomSheetMethods>(
                     onPress={() => setCount((prevState) => prevState + 1)}
                     className="bg-amber-100 active:opacity-80 rounded-full w-12 h-12 items-center justify-center"
                   >
-                    <CustomText>
-                      <Plus stroke="#fb923c" />
-                    </CustomText>
+                    <Plus stroke="#fb923c" />
                   </Pressable>
                 </View>
               </View>
@@ -117,22 +150,26 @@ export const PartnerDetailsItemDetailsSheet = forwardRef<BottomSheetMethods>(
                     as="text-subhead"
                     className="font-dm-sans-medium text-orange-400"
                   >
-                    $5.99
+                    ${item.price}
                   </CustomText>
                 </View>
 
                 <CustomButton className="w-64">
-                  <CustomText className="text-white font-dm-sans-medium">
+                  <CustomText
+                    className="text-white font-dm-sans-medium"
+                    onPress={handleSubmit}
+                    disabled={isSubmitting}
+                  >
                     Add to Cart
                   </CustomText>
                 </CustomButton>
               </View>
             </View>
           </Container>
-        </BottomSheetView>
-      </BottomSheet>
-    );
-  },
-);
+        )}
+      </BottomSheetView>
+    </BottomSheet>
+  );
+});
 
 PartnerDetailsItemDetailsSheet.displayName = 'PartnerDetailsItemDetailsSheet';

@@ -1,4 +1,4 @@
-import { cn } from '@shared/lib/utils';
+import { cn, isOpenNow } from '@shared/lib/utils';
 import { Image, View } from 'react-native';
 import { CustomText, Dot } from '@shared/ui';
 import { Fragment } from 'react';
@@ -18,13 +18,16 @@ interface PartnerCardMdProps extends PartnerEntity {
 export const PartnerCardMd = ({
   distance,
   rating,
-  freeShipping,
   name,
-  open,
-  categories,
   withUnderLine = false,
+  deliveryFee,
   className,
+  openFrom,
+  openTo,
+  tags,
 }: PartnerCardMdProps) => {
+  const open = isOpenNow(openFrom, openTo);
+
   return (
     <View
       className={cn(
@@ -64,18 +67,19 @@ export const PartnerCardMd = ({
 
         <Dot />
 
-        {categories.map((category, index) => (
-          <Fragment key={category}>
-            <CustomText
-              as="text-caption2"
-              className="text-gray-400 font-dm-sans-medium"
-            >
-              {category}
-            </CustomText>
+        {tags &&
+          tags.map((tag, index) => (
+            <Fragment key={tag}>
+              <CustomText
+                as="text-caption2"
+                className="text-gray-400 font-dm-sans-medium"
+              >
+                {tag}
+              </CustomText>
 
-            {categories.length - 1 !== index && <Dot />}
-          </Fragment>
-        ))}
+              {tag.length - 1 !== index && <Dot />}
+            </Fragment>
+          ))}
       </View>
 
       <View className="flex-row items-center">
@@ -85,7 +89,7 @@ export const PartnerCardMd = ({
             as="text-caption2"
             className="font-dm-sans-medium text-white"
           >
-            {rating}
+            {rating ?? 0}
           </CustomText>
         </View>
 
@@ -101,7 +105,7 @@ export const PartnerCardMd = ({
           </CustomText>
         </View>
 
-        {freeShipping && (
+        {!deliveryFee && (
           <>
             <Dot className="ml-3 mr-1.5" />
 
